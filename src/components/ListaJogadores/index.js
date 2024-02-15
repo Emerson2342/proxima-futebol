@@ -1,125 +1,59 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, FlatList, Modal, TouchableOpacity, Alert } from 'react-native';
 import { MotiView } from 'moti';
 import { ModalAddProxima } from "../Modal";
 import { useJogadorContext } from "../../context/JogadoresContext";
-import { useReservaContext } from "../../context/ReservasContext";
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { MaterialCommunityIcons } from 'react-native-vector-icons'
+
+
 
 
 
 export default function ListadeJogadores() {
-    const { listaDeJogadores, setListaDeJogadores } = useJogadorContext();
-    const { listaDeReservas, setListaDeReservas } = useReservaContext();
+
+    const { listaDeJogadores, setListaDeJogadores, alterarSelected, alterarReserva, limparSelected } = useJogadorContext();
+
 
     const [nome, setNome] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
-    const [selectedPlayers, setSelectedPlayers] = useState([]);
 
+    const listaOrdenada = [...listaDeJogadores];
+    listaOrdenada.sort((a, b) => a.jogador.localeCompare(b.jogador));
 
-
-    const handleCheckBox = (index) => {
-        // Atualiza a lista de jogadores selecionados
-        if (selectedPlayers.includes(index)) {
-            // Remove o jogador da lista de jogadores selecionados
-            setSelectedPlayers(selectedPlayers.filter(item => item !== index));
-        } else {
-            // Adiciona o jogador à lista de jogadores selecionados
-            setSelectedPlayers([...selectedPlayers, index]);
-        }
-    };
-
-
-    const moverParaReservas = () => {
-        // Mover jogadores selecionados para a lista de reservas
-        const jogadoresSelecionados = selectedPlayers.map(index => listaDeJogadores[index]);
-        const novaListaDeReservas = [...listaDeReservas, ...jogadoresSelecionados];
-
-        // Atualiza o estado de listaDeReservas
-        setListaDeReservas(novaListaDeReservas);
-
-        // Limpa a lista de jogadores selecionados
-        setSelectedPlayers([]);
-    };
-
-    const handlePress = () => {
-        setModalVisible(true);
-    };
-
-    const handleChangeText = (novoNome) => {
-        setNome(novoNome);
-    };
-
-
-    const handleSalvar = async () => {
-
-        const novoJogador = [nome, 0, 0]
-        const newList = [...listaDeJogadores, novoJogador];
-
-        setListaDeJogadores(newList);
-        setNome('');
-        // Esconda o modal
-        setModalVisible(false);
-    };
-
-
-    const handleEditarNome = async (index, novoNome) => {
-        setListaDeJogadores((prevState) => {
-            if (index >= 0 && index < prevState.length) {
-                const newList = [...prevState];
-                newList[index] = [novoNome, newList[index][1], newList[index][2]];
-                return newList;
-            } else {
-                console.error('Índice de jogador inválido:', index);
-                return prevState;
-            }
-        });
-    }
-
-
-    const handleConfirmar = (item, index, novoNome) => {
-        Alert.alert(
-            'Atenção',
-            `Gostaria de alterar o nome do jogador ${item[0]} ou excluir ele da lista???`,
-            [
-                { text: 'Cancelar', style: 'cancel' },
-                { text: 'Apagar Jogador', onPress: () => handleDelete(index) },
-                { text: 'Editar Nome', onPress: () => handleEditarNome(index, novoNome) }
-            ],
-            { cancelable: false }
-        );
-    };
-
-    const handleDelete = (index) => {
-        // Cria uma cópia do array e remove o item na posição 'index'
-        const novaLista = [...listaDeJogadores];
-        novaLista.splice(index, 1);
-
-        // Atualiza o estado com a nova lista sem o item excluído
-        setListaDeJogadores(novaLista);
+    const handleSelect = (jogador) => {
+        alterarSelected(jogador, !jogador.selected);
     };
 
     const renderItem = ({ item, index }) => (
-
         <MotiView
             from={{ rotateX: '-100deg', opacity: 0 }}
             animate={{ rotateX: '0deg', opacity: 1 }}
         >
             <TouchableOpacity
                 onLongPress={() => handleConfirmar(item, index)}
-                onPress={() => handleCheckBox(index)}
             >
+                <TouchableOpacity
+                    style={styles.jogadorContainer}
+                    onPress={() => {
+                        handleSelect(item)
+                    }}
+                >
 
-                <View style={styles.jogadorContainer}>
-                    <TouchableOpacity onPress={() => handleCheckBox(index)}>
-                        <View style={styles.checkBox}>
-                            {selectedPlayers.includes(index) && <Icon name="check" size={18} color="#003b6b" />}
-                        </View>
-                    </TouchableOpacity>
-                    <Text style={styles.jogadorText}>{item[0]}</Text>
-                </View>
-            </TouchableOpacity>
-        </MotiView>
+                    {item.selected ? (<MaterialCommunityIcons
+                        name='checkbox-outline'
+                        size={20}
+                    />) : <MaterialCommunityIcons
+                        name='checkbox-blank-outline'
+                        size={20}
+                    />}
+
+
+                    <Text style={styles.jogadorText}>{item.jogador}</Text>
+                </TouchableOpacity>
+
+            </TouchableOpacity >
+        </MotiView >
+
     );
 
     return (
@@ -127,7 +61,7 @@ export default function ListadeJogadores() {
             <Text style={styles.textTitle}>Jogadores</Text>
 
             <FlatList style={styles.scrollView}
-                data={listaDeJogadores}
+                data={listaOrdenada}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={renderItem}
                 numColumns={2} // Número de colunas
@@ -139,20 +73,26 @@ export default function ListadeJogadores() {
                 <ModalAddProxima
                     proxima={listaDeJogadores}
                     nome={nome}
-                    handleSalvar={handleSalvar}
-                    handleChangeText={handleChangeText}
+                    // handleSalvar={handleSalvar}
+                    // handleChangeText={handleChangeText}
                     handleClose={() => setModalVisible(false)}
                 />
             </Modal>
 
             <View style={styles.buttonContainer}>
                 <View style={styles.inputContainer}>
-                    <TouchableOpacity onPress={moverParaReservas} style={styles.inputButton}>
+                    <TouchableOpacity
+                        //</View> onPress={moverParaReservas} 
+                        onPress={() => { alterarReserva(); limparSelected() }}
+                        style={styles.inputButton}>
                         <Text style={styles.inputButtonText}>Adicionar para a reserva</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.inputContainer}>
-                    <TouchableOpacity onPress={handlePress} style={styles.inputButton}>
+                    <TouchableOpacity
+                        // onPress={handlePress}
+                        onPress={() => alert(JSON.stringify(listaOrdenada, null, 2))}
+                        style={styles.inputButton}>
                         <Text style={styles.inputButtonText}>Adicione um novo jogador</Text>
                     </TouchableOpacity>
 
@@ -190,7 +130,7 @@ const styles = StyleSheet.create({
         height: 24,
         borderRadius: 5,
         borderWidth: 2,
-        borderColor: '#003b6b',
+
         justifyContent: 'center',
         alignItems: 'center'
     },

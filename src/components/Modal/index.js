@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Pressable } from "react-native";
+import { color } from "react-native-elements/dist/helpers";
 //import * as Clipboard from 'expo-clipboard';
 
 export function ModalAddProxima({ handleSalvar, handleClose, nome, handleChangeText }) {
@@ -7,21 +8,22 @@ export function ModalAddProxima({ handleSalvar, handleClose, nome, handleChangeT
     return (
         <View style={styles.container}>
             <View style={styles.content}>
-                <Pressable style={styles.innerPassword} >
-                    <TextInput
-                        placeholder="Digite um nome"
-                        value={nome}
-                        onChangeText={handleChangeText}
-                        style={{ borderBottomWidth: 1, marginBottom: 16 }}
-                    />
-                </Pressable>
+
+                <TextInput
+                    style={styles.input}
+                    placeholder="Digite um nome"
+                    value={nome}
+                    onChangeText={handleChangeText}
+
+                />
+
 
                 <View style={styles.buttonArea}>
-                    <TouchableOpacity style={styles.button} onPress={handleClose}>
+                    <TouchableOpacity style={styles.button} onPress={() => handleClose()}>
                         <Text style={styles.buttonText} >Voltar</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[styles.button, styles.buttonSave]} onPress={handleSalvar}>
-                        <Text style={styles.buttonSaveText}>Salvar Próxima</Text>
+                    <TouchableOpacity style={[styles.button, { backgroundColor: "#003b6b" }]} onPress={() => handleSalvar()}>
+                        <Text style={[styles.buttonText, { color: "#fff" }]}>Salvar Próxima</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -43,46 +45,38 @@ const styles = StyleSheet.create({
         paddingBottom: 24,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 10,
+        borderRadius: 7,
     },
-    title: {
-        fontSize: 20,
-        fontWeight: "bold",
-        color: "#fff",
-        marginBottom: 24
-    },
-    innerPassword: {
-        backgroundColor: "#ffff",
+
+    input: {
+        borderWidth: 1,
         width: "90%",
-        padding: 14,
-        borderRadius: 10
-    },
-    text: {
-        color: "#000",
-        textAlign: "center"
+        fontSize: 15,
+        padding: 10,
+        borderRadius: 7,
+        borderColor: "#003b6b"
+        // color: "#003b6b"
     },
     buttonArea: {
         flexDirection: "row",
         width: '90%',
         marginTop: 8,
         alignItems: "center",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
     },
     button: {
-        flex: 1,
+        width: '45%',
         alignItems: 'center',
-        marginBottom: 14,
-        marginTop: 14,
-        padding: 8,
-        backgroundColor: '#d5fdcf',
-        borderRadius: 10,
+        marginTop: 10,
+        padding: 10,
+        borderRadius: 7,
+        borderWidth: 2,
+        borderColor: "#003b6b"
+
     },
-    buttonSave: {
-        backgroundColor: "#127066",
-        borderRadius: 10,
-    },
-    buttonSaveText: {
-        color: "#fff",
-        fontWeight: "bold"
+    buttonText: {
+        color: "#003b6b",
+        fontSize: 15,
+        fontWeight: "bold",
     }
 })

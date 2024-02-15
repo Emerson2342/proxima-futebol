@@ -7,7 +7,7 @@
     "icon": "./assets/society.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/chute.png",
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#004f78"
     },
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/iconAndroid.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#004f78"
       },
       "package": "com.missinhoo.proxima"

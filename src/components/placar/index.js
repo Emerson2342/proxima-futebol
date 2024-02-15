@@ -1,11 +1,8 @@
 import React from "react";
-import { View, StyleSheet, Text, Pressable, TouchableOpacity } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { MotiView, MotiText } from "moti";
-import { useJogadorContext } from "../../context/JogadoresContext";
-import { useGolsContext } from "../../context/GolsContext";
 
 export default function Placar() {
-    const { gol1, gol2, zerarPlacar } = useGolsContext();
 
 
     return (
@@ -32,12 +29,12 @@ export default function Placar() {
                                 rotateX: '0deg',
                                 opacity: 1
                             }}
-                            style={styles.placarResultado}>{gol1}</MotiText>
+                            style={styles.placarResultado}>0</MotiText>
                     </View>
                 </View>
                 {/* *************************************************************** */}
                 <View ><TouchableOpacity
-                    onPress={zerarPlacar}
+
                 ><Text style={styles.zerarPlacar}>X</Text></TouchableOpacity></View>
                 {/* *************************************************************** */}
                 <View style={styles.time2}>
@@ -55,7 +52,7 @@ export default function Placar() {
                                 rotateX: '0deg',
                                 opacity: 1
                             }}
-                            style={styles.placarResultado}>{gol2}</MotiText>
+                            style={styles.placarResultado}>0</MotiText>
                     </View>
 
                     {/* NOME DO TIME */}

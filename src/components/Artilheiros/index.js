@@ -7,7 +7,15 @@ export default function Artilheiros() {
 
     const { listaDeJogadores } = useJogadorContext();
 
-    const gols = [...listaDeJogadores].sort((a, b) => b[1] - a[1]);
+    const gols = listaDeJogadores.slice()
+        .sort((a, b) => {
+            // Primeiro critério: Gols em ordem decrescente
+            if (b.gols !== a.gols) {
+                return b.gols - a.gols;
+            }
+            // Segundo critério: Assistência em ordem decrescente
+            return b.assist - a.assist;
+        });
 
     const renderItemGols = ({ item, index }) => {
         const ordem = index + 1;
@@ -17,14 +25,15 @@ export default function Artilheiros() {
                     <Text style={{ color: "#003b6b", fontWeight: "bold", textAlign: "center" }}>{ordem}-</Text>
                 </View>
                 <View style={styles.itemJogador}>
-                    <Text style={styles.listItem}>{item[0]}</Text>
+                    <Text style={styles.listItem}>
+                        {item.jogador}</Text>
                 </View>
                 <View style={styles.itemGol}>
                     <Text style={styles.listItem}>
-                        {item[1]}</Text></View>
+                        {item.gols}</Text></View>
                 <View style={styles.itemAssist}>
                     <Text style={styles.listItem}>
-                        {item[2]}</Text>
+                        {item.assist}</Text>
                 </View>
             </View>
         )
@@ -36,7 +45,6 @@ export default function Artilheiros() {
             <Image
                 style={styles.imagemCampo}
                 source={require('../../../assets/chute.png')} />
-
 
             <Text style={styles.titulo}>Gols e Assistências</Text>
             <View style={styles.column}>
@@ -57,7 +65,6 @@ export default function Artilheiros() {
                     renderItem={renderItemGols}
                 />
             </View>
-
         </View>
 
     );

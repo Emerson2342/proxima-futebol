@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, Alert, FlatList } from "react-native";
 import { MotiView } from 'moti';
-import { useReservaContext } from "../../context/ReservasContext";
+import { useJogadorContext } from "../../context/JogadoresContext";
 
 export default function ListaProximas() {
 
-    const { listaDeReservas, setListaDeReservas } = useReservaContext();
 
+
+    const { listaDeJogadores, LimparReserva, LimparReservaJogador } = useJogadorContext();
     const [nome, setNome] = useState('');
+
+    const jogadoresReserva = listaDeJogadores.filter((jogador) => jogador.reserva);
+
 
     const handleChangeText = (novoNome) => {
         setNome(novoNome);
@@ -38,15 +42,10 @@ export default function ListaProximas() {
     };
 
     const handleDelete = (index) => {
-        // Cria uma cópia do array e remove o item na posição 'index'
-        const novaLista = [...listaDeReservas];
-        novaLista.splice(index, 1);
-
-        // Atualiza o estado com a nova lista sem o item excluído
-        setListaDeReservas(novaLista);
+        LimparReservaJogador(index)
     };
     const handleDeleteAll = () => {
-        setListaDeReservas([])
+        LimparReserva()
     }
 
     const embaralharArray = () => {
@@ -67,7 +66,7 @@ export default function ListaProximas() {
         >
             <TouchableOpacity onLongPress={() => handleConfirmar(item, index)}>
                 <View style={styles.jogadorContainer}>
-                    <Text style={styles.jogadorText}>{item[0]}</Text>
+                    <Text style={styles.jogadorText}>{item.jogador}</Text>
                 </View>
             </TouchableOpacity>
         </MotiView>
@@ -83,7 +82,7 @@ export default function ListaProximas() {
 
             <FlatList
                 style={styles.scrollView}
-                data={listaDeReservas}
+                data={jogadoresReserva}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={renderItem}
                 numColumns={2} // Número de colunas

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import BackgroundTimer from 'react-native-background-timer';
 import Timer from 'react-native-timer'
-import CountDown from 'react-native-countdown-component';
+//import CountDown from 'react-native-countdown-component';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { Audio } from 'expo-av';
 
@@ -58,8 +58,9 @@ export default function Cronometro() {
 
 
     return (
-        <View >
-            <CountDown style={styles.cronometro}
+        <View>
+
+            {/*  <CountDown style={styles.cronometro}
                 until={timer}
                 timeToShow={['M', 'S']}
                 timeLabels={{ m: null, s: null }}
@@ -71,22 +72,6 @@ export default function Cronometro() {
                 running={isRunning}
             />
             <View style={styles.botoes}>
-                {/*  <TouchableOpacity style={[styles.botao, { backgroundColor: '#00FA9A' }]} onPress={handleStart}>
-                    <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold' }}>Iniciar</Text>
-                </TouchableOpacity> */}
-                {/*   <TouchableOpacity style={styles.botao} onPress={() => handleStart()}>
-                    <Entypo name='controller-play'
-                        color={"#003b6b"}
-                        size={50}
-                    ></Entypo>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.botao} onPress={() => handlePause()}>
-                    <Entypo name='controller-paus'
-                        color={"#003b6b"}
-                        size={40}
-                    ></Entypo>
-                </TouchableOpacity> */}
 
                 <TouchableOpacity style={styles.botao} onPress={isRunning ? () => handlePause() : () => handleStart()}>
                     <Entypo name={isRunning ? 'controller-paus' : 'controller-play'}
@@ -102,12 +87,7 @@ export default function Cronometro() {
                     ></Entypo>
                 </TouchableOpacity>
 
-                {/*   <TouchableOpacity style={[styles.botao, { backgroundColor: '#A9A9A9' }]} onPress={handlePause}>
-                    <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold' }}>Pausar</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.botao, { backgroundColor: '#DC143C' }]} onPress={handleReset}>
-                    <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold' }}>Zerar</Text>
-                </TouchableOpacity> */}
+
             </View>
             <View style={styles.setaContainer}>
                 <TouchableOpacity style={styles.seta} onPress={handleIncreaseMinutes}>
@@ -123,7 +103,7 @@ export default function Cronometro() {
                         size={40}
                         color={'#003b6b'} />
                 </TouchableOpacity>
-            </View>
+            </View> */}
 
         </View >
     )
