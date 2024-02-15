@@ -1,0 +1,152 @@
+import React, { useState, useContext, useEffect } from "react";
+import { StyleSheet, Text, View, FlatList, Image } from 'react-native';
+import { useJogadorContext } from "../../context/JogadoresContext";
+
+
+export default function Artilheiros() {
+
+    const { listaDeJogadores } = useJogadorContext();
+
+    const gols = [...listaDeJogadores].sort((a, b) => b[1] - a[1]);
+
+    const renderItemGols = ({ item, index }) => {
+        const ordem = index + 1;
+        return (
+            <View style={styles.listContainer}>
+                <View style={styles.itemOrdem}>
+                    <Text style={{ color: "#003b6b", fontWeight: "bold", textAlign: "center" }}>{ordem}-</Text>
+                </View>
+                <View style={styles.itemJogador}>
+                    <Text style={styles.listItem}>{item[0]}</Text>
+                </View>
+                <View style={styles.itemGol}>
+                    <Text style={styles.listItem}>
+                        {item[1]}</Text></View>
+                <View style={styles.itemAssist}>
+                    <Text style={styles.listItem}>
+                        {item[2]}</Text>
+                </View>
+            </View>
+        )
+    }
+
+    return (
+
+        <View style={styles.container}>
+            <Image
+                style={styles.imagemCampo}
+                source={require('../../../assets/chute.png')} />
+
+
+            <Text style={styles.titulo}>Gols e Assistências</Text>
+            <View style={styles.column}>
+                <View style={styles.cabecalho}>
+                    <View style={styles.jogador}>
+                        <Text style={[styles.textCabec, { textAlign: "right" }]}>Jogador</Text>
+                    </View>
+                    <View style={styles.gols}>
+                        <Text style={[styles.textCabec, { textAlign: "right" }]}>Gols</Text>
+                    </View>
+                    <View style={styles.assist}>
+                        <Text style={[styles.textCabec, { textAlign: "center" }]}>Assistências</Text>
+                    </View>
+                </View>
+                <FlatList
+                    data={gols}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={renderItemGols}
+                />
+            </View>
+
+        </View>
+
+    );
+}
+const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'column',
+        index: 1
+    },
+    cabecalho: {
+        marginRight: 10,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 15,
+    },
+    jogador: {
+        width: '33%'
+    },
+    gols: {
+
+        width: '25%',
+    },
+    assist: {
+
+        width: '40%',
+
+    },
+    textCabec: {
+        color: "#003b6b",
+        fontSize: 25,
+        fontWeight: 'bold',
+        textAlign: 'center'
+    },
+    column: {
+        top: -35,
+        maxHeight: 450,
+        alignItems: 'center',
+        marginBottom: 25
+    },
+    listContainer: {
+        paddingLeft: 15,
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    itemOrdem: {
+        textAlign: 'center',
+        width: '7%'
+    },
+    itemJogador: {
+        textAlign: 'center',
+        width: '40%',
+    },
+    itemGol: {
+        textAlign: 'center',
+        width: '25%'
+    },
+    itemAssist: {
+        textAlign: 'center',
+        width: '30%'
+    },
+    titulo: {
+        top: -80,
+        fontSize: 40,
+        fontWeight: 'bold',
+        color: '#fff',
+        textAlign: 'center'
+
+    },
+    listIndex: {
+        width: '30%',
+        textAlign: 'center',
+        fontSize: 25,
+        fontWeight: 'bold'
+    },
+    listItem: {
+        color: "#004f78",
+        fontSize: 15,
+        textAlign: 'left',
+    },
+    imagemCampo: {
+        opacity: 0.3,
+        left: -13,
+        top: 70,
+        width: 400,
+        height: 470,
+        position: 'absolute',
+        resizeMode: 'stretch',
+    }
+
+});

@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
+import { Routes } from "./src/pages/routes";
+import { TimeProvider } from "./src/context/TimeContext"; // Substitua pelo caminho real
+import { JogadorProvider } from "./src/context/JogadoresContext";
+import { ReservaProvider } from "./src/context/ReservasContext";
+import { GolsProvider } from "./src/context/GolsContext";
+
+
+import 'react-native-reanimated';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <JogadorProvider>
+      <ReservaProvider>
+        <TimeProvider>
+          <GolsProvider>
+            <NavigationContainer>
+              <Routes />
+            </NavigationContainer>
+          </GolsProvider>
+        </TimeProvider>
+      </ReservaProvider>
+    </JogadorProvider>
+
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

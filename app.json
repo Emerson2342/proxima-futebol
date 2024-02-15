@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "proxima",
+    "name": "Próxima",
     "slug": "proxima",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/society.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/chute.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#004f78"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,12 +19,18 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/iconAndroid.png",
+        "backgroundColor": "#004f78"
+      },
+      "package": "com.missinhoo.proxima"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/society.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "5ed42fb9-75d6-4909-a84c-12da36c6ec3c"
+      }
     }
   }
 }
