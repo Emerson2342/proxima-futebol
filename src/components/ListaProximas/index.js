@@ -16,12 +16,8 @@ export default function ListaProximas() {
 
     const misturarReservas = () => {
         setJogadoresReservas((prevReserva) => {
-            // Crie uma cópia da lista de reservas
             const copiaReservas = [...prevReserva];
-
-            // Embaralhe a lista copiada usando o método sort
             copiaReservas.sort(() => Math.random() - 0.5);
-
             return copiaReservas;
         });
     }
@@ -52,7 +48,8 @@ export default function ListaProximas() {
     };
 
     const handleDelete = (index) => {
-        LimparReservaJogador(index)
+        jogadoresReservas.splice(index, 1);
+        setJogadoresReservas([...jogadoresReservas]);
     };
 
 
@@ -97,7 +94,7 @@ export default function ListaProximas() {
                     <TouchableOpacity style={styles.inputButton}
                         onLongPress={() => misturarReservas()}
                     >
-                        <Text style={styles.inputButtonText}>Misturar Próximas</Text>
+                        <Text style={styles.inputButtonText}>Segure Para Misturar</Text>
                     </TouchableOpacity></View>
                 <View style={styles.inputContainer}>
                     <TouchableOpacity style={styles.inputButton} onPress={handleConfirmarTodos}>

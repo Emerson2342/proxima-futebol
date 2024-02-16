@@ -14,18 +14,23 @@ export default function ListadeJogadores() {
     const { listaDeJogadores, alterarSelected, setListaDeJogadores, limparSelected } = useJogadorContext();
     const { jogadoresReservas, setJogadoresReservas } = useJogadoresReservasContext();
 
-
     const handleSelect = (jogador) => {
-        // Inverte o valor da propriedade selected
-        alterarSelected(jogador, !jogador.selected);
+
+        if (jogador !== null && jogador !== undefined) {
+
+            alterarSelected(jogador, !jogador.selected);
+        } else {
+
+            console.error("Erro: jogador é null ou undefined.");
+        }
     };
 
 
     const addParaReserva = () => {
         setJogadoresReservas((prevReserva) => {
-            const jogadoresSelecionados = listaDeJogadores.filter((jogador) => jogador.selected);
+            const jogadoresSelecionados = listaDeJogadores.filter((jogador) => jogador && jogador.selected);
 
-            // Verifica se cada jogador selecionado não está presente na lista de reservas
+
             const jogadoresNaoPresentes = jogadoresSelecionados.filter(
                 (jogadorSelecionado) => !prevReserva.some((j) => j.id === jogadorSelecionado.id)
             );
@@ -35,16 +40,14 @@ export default function ListadeJogadores() {
 
         setListaDeJogadores((prevList) =>
             prevList.map((jogador) =>
-                jogador.selected ? { ...jogador, selected: !jogador.selected } : jogador
+                jogador && jogador.selected ? { ...jogador, selected: !jogador.selected } : jogador
             )
         );
     };
 
-
-
-    const listaOrdenada = [...listaDeJogadores];
-    listaOrdenada.sort((a, b) => a.jogador.localeCompare(b.jogador));
-
+    const listaOrdenada = [...listaDeJogadores]
+        .filter((item) => item !== null && item !== undefined)
+        .sort((a, b) => a.jogador.localeCompare(b.jogador));
 
 
     const renderItem = ({ item, index }) => (
@@ -64,11 +67,7 @@ export default function ListadeJogadores() {
                     name='checkbox-blank-outline'
                     size={20}
                 />}
-
-
                 <Text style={styles.jogadorText}>{item.jogador}</Text>
-
-
             </TouchableOpacity >
         </MotiView >
 
@@ -82,8 +81,8 @@ export default function ListadeJogadores() {
                 data={listaOrdenada}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={renderItem}
-                numColumns={2} // Número de colunas
-                columnWrapperStyle={{ justifyContent: 'space-between' }} // Espaçamento entre as colunas
+                numColumns={2}
+                columnWrapperStyle={{ justifyContent: 'space-between' }}
             />
 
 

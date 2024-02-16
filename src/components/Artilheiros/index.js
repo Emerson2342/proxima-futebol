@@ -7,13 +7,13 @@ export default function Artilheiros() {
 
     const { listaDeJogadores } = useJogadorContext();
 
-    const gols = listaDeJogadores.slice()
+    const gols = listaDeJogadores
+
+        .filter((item) => item !== null)
         .sort((a, b) => {
-            // Primeiro critério: Gols em ordem decrescente
             if (b.gols !== a.gols) {
                 return b.gols - a.gols;
             }
-            // Segundo critério: Assistência em ordem decrescente
             return b.assist - a.assist;
         });
 
@@ -61,7 +61,7 @@ export default function Artilheiros() {
                 </View>
                 <FlatList
                     data={gols}
-                    keyExtractor={(item, index) => index.toString()}
+                    keyExtractor={(item, index) => (item.id ? item.id.toString() : `empty_${index}`)}
                     renderItem={renderItemGols}
                 />
             </View>
