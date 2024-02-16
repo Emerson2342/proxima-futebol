@@ -3,26 +3,49 @@ import { StyleSheet, Text, View, FlatList, Modal, TouchableOpacity, Alert } from
 import { MotiView } from 'moti';
 import { ModalAddProxima } from "../Modal";
 import { useJogadorContext } from "../../context/JogadoresContext";
+import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
 import { MaterialCommunityIcons } from 'react-native-vector-icons'
-
 
 
 
 
 export default function ListadeJogadores() {
 
-    const { listaDeJogadores, setListaDeJogadores, alterarSelected, alterarReserva, limparSelected } = useJogadorContext();
+    const { listaDeJogadores, alterarSelected, setListaDeJogadores, limparSelected } = useJogadorContext();
+    const { jogadoresReservas, setJogadoresReservas } = useJogadoresReservasContext();
 
 
-    const [nome, setNome] = useState('');
-    const [modalVisible, setModalVisible] = useState(false);
+    const handleSelect = (jogador) => {
+        // Inverte o valor da propriedade selected
+        alterarSelected(jogador, !jogador.selected);
+    };
+
+
+    const addParaReserva = () => {
+        setJogadoresReservas((prevReserva) => {
+            const jogadoresSelecionados = listaDeJogadores.filter((jogador) => jogador.selected);
+
+            // Verifica se cada jogador selecionado não está presente na lista de reservas
+            const jogadoresNaoPresentes = jogadoresSelecionados.filter(
+                (jogadorSelecionado) => !prevReserva.some((j) => j.id === jogadorSelecionado.id)
+            );
+
+            return [...prevReserva, ...jogadoresNaoPresentes];
+        });
+
+        setListaDeJogadores((prevList) =>
+            prevList.map((jogador) =>
+                jogador.selected ? { ...jogador, selected: !jogador.selected } : jogador
+            )
+        );
+    };
+
+
 
     const listaOrdenada = [...listaDeJogadores];
     listaOrdenada.sort((a, b) => a.jogador.localeCompare(b.jogador));
 
-    const handleSelect = (jogador) => {
-        alterarSelected(jogador, !jogador.selected);
-    };
+
 
     const renderItem = ({ item, index }) => (
         <MotiView
@@ -30,26 +53,21 @@ export default function ListadeJogadores() {
             animate={{ rotateX: '0deg', opacity: 1 }}
         >
             <TouchableOpacity
-                onLongPress={() => handleConfirmar(item, index)}
+                style={styles.jogadorContainer}
+                onPress={() => handleSelect(item)}
             >
-                <TouchableOpacity
-                    style={styles.jogadorContainer}
-                    onPress={() => {
-                        handleSelect(item)
-                    }}
-                >
 
-                    {item.selected ? (<MaterialCommunityIcons
-                        name='checkbox-outline'
-                        size={20}
-                    />) : <MaterialCommunityIcons
-                        name='checkbox-blank-outline'
-                        size={20}
-                    />}
+                {item.selected ? (<MaterialCommunityIcons
+                    name='checkbox-outline'
+                    size={20}
+                />) : <MaterialCommunityIcons
+                    name='checkbox-blank-outline'
+                    size={20}
+                />}
 
 
-                    <Text style={styles.jogadorText}>{item.jogador}</Text>
-                </TouchableOpacity>
+                <Text style={styles.jogadorText}>{item.jogador}</Text>
+
 
             </TouchableOpacity >
         </MotiView >
@@ -69,28 +87,16 @@ export default function ListadeJogadores() {
             />
 
 
-            <Modal visible={modalVisible} animationType="fade" transparent={true}>
-                <ModalAddProxima
-                    proxima={listaDeJogadores}
-                    nome={nome}
-                    // handleSalvar={handleSalvar}
-                    // handleChangeText={handleChangeText}
-                    handleClose={() => setModalVisible(false)}
-                />
-            </Modal>
-
             <View style={styles.buttonContainer}>
                 <View style={styles.inputContainer}>
                     <TouchableOpacity
-                        //</View> onPress={moverParaReservas} 
-                        onPress={() => { alterarReserva(); limparSelected() }}
+                        onPress={() => addParaReserva()}
                         style={styles.inputButton}>
                         <Text style={styles.inputButtonText}>Adicionar para a reserva</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.inputContainer}>
                     <TouchableOpacity
-                        // onPress={handlePress}
                         onPress={() => alert(JSON.stringify(listaOrdenada, null, 2))}
                         style={styles.inputButton}>
                         <Text style={styles.inputButtonText}>Adicione um novo jogador</Text>

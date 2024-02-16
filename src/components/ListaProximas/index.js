@@ -2,20 +2,30 @@ import React, { useState, useEffect } from "react";
 import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, Alert, FlatList } from "react-native";
 import { MotiView } from 'moti';
 import { useJogadorContext } from "../../context/JogadoresContext";
+import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
+
 
 export default function ListaProximas() {
 
 
 
-    const { listaDeJogadores, LimparReserva, LimparReservaJogador } = useJogadorContext();
-    const [nome, setNome] = useState('');
+    const { listaDeJogadores, LimparReservaJogador } = useJogadorContext();
 
-    const jogadoresReserva = listaDeJogadores.filter((jogador) => jogador.reserva);
+    const { jogadoresReservas, setJogadoresReservas } = useJogadoresReservasContext();
 
 
-    const handleChangeText = (novoNome) => {
-        setNome(novoNome);
-    };
+    const misturarReservas = () => {
+        setJogadoresReservas((prevReserva) => {
+            // Crie uma cópia da lista de reservas
+            const copiaReservas = [...prevReserva];
+
+            // Embaralhe a lista copiada usando o método sort
+            copiaReservas.sort(() => Math.random() - 0.5);
+
+            return copiaReservas;
+        });
+    }
+
 
     const handleConfirmar = (item, index) => {
         Alert.alert(
@@ -34,7 +44,7 @@ export default function ListaProximas() {
             `Tem certeza que deseja limpar a lista de próximas?`,
             [
                 { text: 'Cancelar', style: 'cancel' },
-                { text: 'Confirmar', onPress: () => handleDeleteAll() },
+                { text: 'Confirmar', onPress: () => setJogadoresReservas([]) },
             ],
             { cancelable: false }
         );
@@ -44,14 +54,8 @@ export default function ListaProximas() {
     const handleDelete = (index) => {
         LimparReservaJogador(index)
     };
-    const handleDeleteAll = () => {
-        LimparReserva()
-    }
 
-    const embaralharArray = () => {
-        const arrayEmbaralhado = [...listaDeReservas].sort(() => Math.random() - 0.5);
-        setListaDeReservas(arrayEmbaralhado);
-    }
+
 
     const renderItem = ({ item, index }) => (
         <MotiView
@@ -82,15 +86,17 @@ export default function ListaProximas() {
 
             <FlatList
                 style={styles.scrollView}
-                data={jogadoresReserva}
+                data={jogadoresReservas}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={renderItem}
-                numColumns={2} // Número de colunas
-                columnWrapperStyle={{ justifyContent: 'space-between' }} // Espaçamento entre as colunas
+                numColumns={2}
+                columnWrapperStyle={{ justifyContent: 'space-between' }}
             />
             <View style={styles.container}>
                 <View style={styles.inputContainer}>
-                    <TouchableOpacity style={styles.inputButton} onLongPress={embaralharArray}>
+                    <TouchableOpacity style={styles.inputButton}
+                        onLongPress={() => misturarReservas()}
+                    >
                         <Text style={styles.inputButtonText}>Misturar Próximas</Text>
                     </TouchableOpacity></View>
                 <View style={styles.inputContainer}>

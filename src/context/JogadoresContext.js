@@ -10,23 +10,23 @@ export const useJogadorContext = () => {
 
 export const JogadorProvider = ({ children }) => {
     const [listaDeJogadores, setListaDeJogadores] = useState([
-        { jogador: 'Witch Doctor', gols: 3, assist: 5, reserva: false, titular: false, selected: false },
-        { jogador: 'Lion', gols: 5, assist: 3, reserva: false, titular: false, selected: false },
-        { jogador: 'AntiMage', gols: 2, assist: 1, reserva: false, titular: false, selected: false },
-        { jogador: 'Axe', gols: 2, assist: 0, reserva: false, titular: false, selected: false },
-        { jogador: 'Outworld Devourer', gols: 7, assist: 1, reserva: false, titular: false, selected: false },
-        { jogador: 'Enchantress', gols: 5, assist: 5, reserva: false, titular: false, selected: false },
-        { jogador: 'Faceless Void', gols: 6, assist: 3, reserva: false, titular: false, selected: false },
-        { jogador: 'Queen of Pain', gols: 9, assist: 8, reserva: false, titular: false, selected: false },
-        { jogador: 'Invoker', gols: 0, assist: 7, reserva: false, titular: false, selected: false },
-        { jogador: 'Tidehunter', gols: 5, assist: 2, reserva: false, titular: false, selected: false },
-        { jogador: 'Ember Spirit', gols: 4, assist: 5, reserva: false, titular: false, selected: false },
-        { jogador: 'Sven', gols: 8, assist: 4, reserva: false, titular: false, selected: false },
-        { jogador: 'Lina', gols: 3, assist: 6, reserva: false, titular: false, selected: false },
-        { jogador: 'Medusa', gols: 4, assist: 9, reserva: false, titular: false, selected: false },
-        { jogador: 'Spectre', gols: 6, assist: 1, reserva: false, titular: false, selected: false },
-        { jogador: 'Meepo', gols: 6, assist: 1, reserva: false, titular: false, selected: false },
-        { jogador: 'Timbersaw', gols: 2, assist: 0, reserva: false, titular: false, selected: false },
+        { id: 11, jogador: 'Witch Doctor', gols: 3, assist: 5, selected: false },
+        { id: 12, jogador: 'Lion', gols: 5, assist: 3, selected: false },
+        { id: 13, jogador: 'AntiMage', gols: 2, assist: 1, selected: false },
+        { id: 14, jogador: 'Axe', gols: 2, assist: 0, selected: false },
+        { id: 15, jogador: 'Outworld Devourer', gols: 7, assist: 1, selected: false },
+        { id: 16, jogador: 'Enchantress', gols: 5, assist: 5, selected: false },
+        { id: 17, jogador: 'Faceless Void', gols: 6, assist: 3, selected: false },
+        { id: 18, jogador: 'Queen of Pain', gols: 9, assist: 8, selected: false },
+        { id: 19, jogador: 'Invoker', gols: 0, assist: 7, selected: false },
+        { id: 20, jogador: 'Tidehunter', gols: 5, assist: 2, selected: false },
+        { id: 21, jogador: 'Ember Spirit', gols: 4, assist: 5, selected: false },
+        { id: 22, jogador: 'Sven', gols: 8, assist: 4, selected: false },
+        { id: 23, jogador: 'Lina', gols: 3, assist: 6, selected: false },
+        { id: 24, jogador: 'Medusa', gols: 4, assist: 9, selected: false },
+        { id: 25, jogador: 'Spectre', gols: 6, assist: 1, selected: false },
+        { id: 26, jogador: 'Meepo', gols: 6, assist: 1, selected: false },
+        { id: 27, jogador: 'Timbersaw', gols: 2, assist: 0, selected: false },
     ]);
 
     const alterarSelected = (jogador, novoValor) => {
@@ -36,47 +36,6 @@ export const JogadorProvider = ({ children }) => {
             )
         );
     };
-
-    const alterarReserva = () => {
-        setListaDeJogadores((prevList) =>
-            prevList.map((item) =>
-                item.selected && !item.reserva
-                    ? { ...item, reserva: true }
-                    : item
-            )
-        );
-    };
-
-    const LimparReserva = () => {
-        setListaDeJogadores((prevList) =>
-            prevList.map((item) =>
-                item.reserva
-                    ? { ...item, reserva: false }
-                    : item
-            )
-        );
-    };
-
-    const LimparReservaJogador = (index) => {
-        setListaDeJogadores((prevList) =>
-            prevList.map((item, i) =>
-                i === index ? { ...item, reserva: false } : item
-            )
-        );
-    };
-
-
-
-
-    const limparSelected = () => {
-        setListaDeJogadores((prevList) =>
-            prevList.map((item) =>
-                item.selected && item.reserva
-                    ? { ...item, selected: false }
-                    : item
-            )
-        );
-    }
 
     useEffect(() => {
         const loadAsyncData = async () => {
@@ -93,20 +52,6 @@ export const JogadorProvider = ({ children }) => {
         loadAsyncData();
     }, []);
 
-    /*   useEffect(() => {
-          const retrieveData = async () => {
-              try {
-                  const storedData = await AsyncStorage.getItem('listaDeJogadores');
-                  if (storedData) {
-                      setListaDeJogadores(JSON.parse(storedData));
-                  }
-              } catch (error) {
-                  console.error('Erro ao recuperar dados do AsyncStorage:', error);
-              }
-          };
-  
-          retrieveData();
-      }, []); */
 
     useEffect(() => {
         const saveAsyncData = async () => {
@@ -123,7 +68,7 @@ export const JogadorProvider = ({ children }) => {
 
 
     return (
-        <JogadorContext.Provider value={{ LimparReservaJogador, LimparReserva, limparSelected, alterarReserva, alterarSelected, listaDeJogadores, setListaDeJogadores }}>
+        <JogadorContext.Provider value={{ alterarSelected, listaDeJogadores, setListaDeJogadores }}>
             {children}
         </JogadorContext.Provider>
     );
