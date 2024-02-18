@@ -229,7 +229,7 @@ export default function Times() {
 
 const styles = StyleSheet.create({
     container: {
-        top: 130,
+        top: 30,
         flexDirection: 'row',
         justifyContent: "space-around",
 

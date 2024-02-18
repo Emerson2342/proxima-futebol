@@ -49,7 +49,7 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
                         >
                             <View style={{ alignItems: 'center', padding: 4 }}>
                                 <View style={[styles.innerButton,
-                                { backgroundColor: isFocused ? "#004f78" : "transparent" }]}>
+                                { backgroundColor: isFocused ? "#20473c" : "transparent" }]}>
                                     {options.tabBarIcon === 'soccer-field' ? (
                                         <MaterialCommunityIcons
                                             name={options.tabBarIcon}

@@ -5,9 +5,6 @@ import {
 
 } from "react-native";
 
-/* const statusBarHeight =
-    StatusBar.currentHeight ? StatusBar.currentHeight + 45 : 70; */
-
 export default function Header() {
     return (
         <View style={styles.container} />
@@ -18,7 +15,7 @@ export default function Header() {
 const styles = StyleSheet.create({
     container: {
         paddingTop: 110,
-        backgroundColor: '#004f78',
+        backgroundColor: '#3f8d65',
         borderBottomWidth: 1,
     }
 })

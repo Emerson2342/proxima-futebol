@@ -72,9 +72,7 @@ export default function Placar() {
 
 const styles = StyleSheet.create({
     header: {
-        marginTop: -130
     },
-
     placarContend: {
         height: 60,
         marginLeft: 15,

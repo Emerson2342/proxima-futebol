@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, ImageBackground, Text, TouchableOpacity, Alert, FlatList } from "react-native";
 import { MotiView } from 'moti';
-import { useJogadorContext } from "../../context/JogadoresContext";
 import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
 
 
 export default function ListaProximas() {
 
-
-
-    const { listaDeJogadores, LimparReservaJogador } = useJogadorContext();
 
     const { jogadoresReservas, setJogadoresReservas } = useJogadoresReservasContext();
 
@@ -136,10 +132,10 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         backgroundColor: "#ffff",
         borderRadius: 7,
-        elevation: 9
+        elevation: 3
     },
     inputContainer: {
-        backgroundColor: "#003b6b",
+        backgroundColor: "#3f8d65",
         borderRadius: 10,
         marginBottom: 10,
         padding: 10,
