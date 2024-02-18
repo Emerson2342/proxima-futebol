@@ -4,9 +4,7 @@ import { useJogadorContext } from "../../context/JogadoresContext";
 
 
 export default function Artilheiros() {
-
     const { listaDeJogadores } = useJogadorContext();
-
     const gols = listaDeJogadores
 
         .filter((item) => item !== null)
@@ -22,7 +20,7 @@ export default function Artilheiros() {
         return (
             <View style={styles.listContainer}>
                 <View style={styles.itemOrdem}>
-                    <Text style={{ color: "#003b6b", fontWeight: "bold", textAlign: "center" }}>{ordem}-</Text>
+                    <Text style={{ color: "#20473c", fontWeight: "bold", textAlign: "center" }}>{ordem}-</Text>
                 </View>
                 <View style={styles.itemJogador}>
                     <Text style={styles.listItem}>
@@ -44,6 +42,7 @@ export default function Artilheiros() {
         <View style={styles.container}>
             <Image
                 style={styles.imagemCampo}
+
                 source={require('../../../assets/chute.png')} />
 
             <Text style={styles.titulo}>Gols e Assistências</Text>
@@ -71,8 +70,8 @@ export default function Artilheiros() {
 }
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'column',
         index: 1
+
     },
     cabecalho: {
         marginRight: 10,
@@ -85,16 +84,13 @@ const styles = StyleSheet.create({
         width: '33%'
     },
     gols: {
-
         width: '25%',
     },
     assist: {
-
         width: '40%',
-
     },
     textCabec: {
-        color: "#003b6b",
+        color: "#20473c",
         fontSize: 25,
         fontWeight: 'bold',
         textAlign: 'center'
@@ -142,18 +138,17 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     listItem: {
-        color: "#004f78",
+        color: "#20473c",
         fontSize: 15,
         textAlign: 'left',
     },
     imagemCampo: {
         opacity: 0.3,
-        left: -13,
-        top: 70,
-        width: 400,
-        height: 470,
+        objectFit: "contain",
+        width: 350,
+        height: 600,
         position: 'absolute',
-        resizeMode: 'stretch',
+        //resizeMode: 'stretch',
     }
 
 });

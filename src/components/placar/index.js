@@ -4,76 +4,75 @@ import { MotiView, MotiText } from "moti";
 
 export default function Placar() {
 
-
     return (
-        <View style={styles.header}>
-            <View style={styles.placarContend}>
-                {/* *************************************************************** */}
-                <View style={styles.time1}>
-                    {/* NOME DO TIME */}
-                    <View>
-                        <Text style={styles.nomeTime}>
-                            Time 1
-                        </Text>
-                    </View>
-                    {/* PLACAR DO TIME */}
-                    < View
 
-                        style={[styles.placarResultadoContent, { marginLeft: 'auto' }]}>
-                        <MotiText
-                            from={{
-                                rotateX: '-1000deg',
-                                opacity: 0
-                            }}
-                            animate={{
-                                rotateX: '0deg',
-                                opacity: 1
-                            }}
-                            style={styles.placarResultado}>0</MotiText>
-                    </View>
+        <View style={styles.placarContend}>
+            {/* *************************************************************** */}
+            <View style={styles.time1}>
+                {/* NOME DO TIME */}
+                <View>
+                    <Text style={styles.nomeTime}>
+                        Time 1
+                    </Text>
                 </View>
-                {/* *************************************************************** */}
-                <View ><TouchableOpacity
+                {/* PLACAR DO TIME */}
+                < View
 
-                ><Text style={styles.zerarPlacar}>X</Text></TouchableOpacity></View>
-                {/* *************************************************************** */}
-                <View style={styles.time2}>
-                    {/* PLACAR DO TIME */}
-
-                    < View
-
-                        style={[styles.placarResultadoContent, { marginRight: 'auto' }]}>
-                        <MotiText
-                            from={{
-                                rotateX: '-1000deg',
-                                opacity: 0
-                            }}
-                            animate={{
-                                rotateX: '0deg',
-                                opacity: 1
-                            }}
-                            style={styles.placarResultado}>0</MotiText>
-                    </View>
-
-                    {/* NOME DO TIME */}
-                    <View >
-                        <Text style={styles.nomeTime}>
-                            Time 2
-                        </Text>
-                    </View>
-
+                    style={[styles.placarResultadoContent, { marginLeft: 'auto' }]}>
+                    <MotiText
+                        from={{
+                            rotateX: '-1000deg',
+                            opacity: 0
+                        }}
+                        animate={{
+                            rotateX: '0deg',
+                            opacity: 1
+                        }}
+                        style={styles.placarResultado}>0</MotiText>
                 </View>
-                {/* *************************************************************** */}
             </View>
-        </View >
+            {/* *************************************************************** */}
+            <View ><TouchableOpacity
+
+            ><Text style={styles.zerarPlacar}>X</Text></TouchableOpacity></View>
+            {/* *************************************************************** */}
+            <View style={styles.time2}>
+                {/* PLACAR DO TIME */}
+
+                < View
+
+                    style={[styles.placarResultadoContent, { marginRight: 'auto' }]}>
+                    <MotiText
+                        from={{
+                            rotateX: '-1000deg',
+                            opacity: 0
+                        }}
+                        animate={{
+                            rotateX: '0deg',
+                            opacity: 1
+                        }}
+                        style={styles.placarResultado}>0</MotiText>
+                </View>
+
+                {/* NOME DO TIME */}
+                <View >
+                    <Text style={styles.nomeTime}>
+                        Time 2
+                    </Text>
+                </View>
+
+            </View>
+            {/* *************************************************************** */}
+        </View>
+
     )
 };
 
 
 const styles = StyleSheet.create({
-    header: {
-    },
+
     placarContend: {
+        top: 30,
         height: 60,
         marginLeft: 15,
         marginRight: 15,
@@ -86,7 +85,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 15,
         width: '35%',
-        backgroundColor: '#004f78',
+        backgroundColor: '#20473c',
 
     },
 

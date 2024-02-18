@@ -6,19 +6,23 @@ import Times from '../../components/times';
 
 export default function Home() {
     return (
-        <View style={styles.container}>
+        <View >
 
             <StatusBar backgroundColor={'#20473c'} />
             <Header />
-            <Cronometro />
-            <Placar />
-            <Times />
+            <View style={styles.container}>
+
+                <Cronometro />
+                <Placar />
+                <Times />
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        //flex: 1,
+        top: -105
     },
 });

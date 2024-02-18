@@ -57,10 +57,13 @@ export default function ListadeJogadores() {
         >
             <View
                 style={item.selected ? styles.jogadorContainerSelected : styles.jogadorContainer}
-                // aria-selected={alert("sim")}
-                onTouchStart={() => handleSelect(item)}
+            // aria-selected={alert("sim")}
+
+
             >
-                <Text style={item.selected ? styles.jogadorTextSelected : styles.jogadorText}>{item.jogador}</Text>
+                <Text
+                    onPress={() => handleSelect(item)}
+                    style={item.selected ? styles.jogadorTextSelected : styles.jogadorText}>{item.jogador}</Text>
             </View >
         </MotiView >
 
@@ -87,13 +90,14 @@ export default function ListadeJogadores() {
                         <Text style={styles.inputButtonText}>Adicionar para a reserva</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.inputContainer}>
+                <View
+                    on
+                    style={styles.inputContainer}>
                     <TouchableOpacity
                         onPress={() => alert(JSON.stringify(listaOrdenada, null, 2))}
                         style={styles.inputButton}>
                         <Text style={styles.inputButtonText}>Adicione um novo jogador</Text>
                     </TouchableOpacity>
-
                 </View>
             </View>
         </View >
@@ -133,8 +137,6 @@ const styles = StyleSheet.create({
         backgroundColor: "#20473c",
         borderRadius: 7,
         elevation: 3,
-
-
     },
     jogadorText: {
         color: '#000',
@@ -160,7 +162,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginBottom: 10,
         padding: 10,
-        width: '85%',
+
     },
 
     container: {
@@ -173,13 +175,13 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 25,
         fontWeight: 'bold',
-        bottom: 'auto'
+        bottom: 'auto',
+
     },
     buttonContainer: {
-        position: 'absolute',
-        paddingLeft: 10,
-        paddingRight: 10,
-        top: 520,
+        marginTop: 20,
+        paddingLeft: 5,
+        paddingRight: 5,
         justifyContent: 'center',
         width: '100%',
 
