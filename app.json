@@ -25,7 +25,7 @@
       "package": "com.missinhoo.proxima"
     },
     "web": {
-      "favicon": "./assets/society.png"
+      "favicon": "./assets/icon.png"
     },
     "extra": {
       "eas": {
