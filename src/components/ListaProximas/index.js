@@ -73,10 +73,6 @@ export default function ListaProximas() {
   return (
     <View>
       <Text style={styles.textTitle}> Banco de Reservas</Text>
-      <ImageBackground
-        style={styles.imagemCampo}
-        source={require("../../../assets/reservas.png")}
-      ></ImageBackground>
 
       <FlatList
         style={styles.scrollView}
