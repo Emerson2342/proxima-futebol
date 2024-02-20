@@ -19,6 +19,7 @@ export default function Placar() {
 
 const styles = StyleSheet.create({
   placarContainer: {
+    display: "none",
     top: -85,
     width: "30%",
     marginLeft: 10,

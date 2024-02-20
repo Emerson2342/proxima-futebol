@@ -13,14 +13,11 @@ import { useJogadorContext } from "../../context/JogadoresContext";
 import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
 
 export default function ListadeJogadores() {
-  const {
-    listaDeJogadores,
-    alterarSelected,
-    setListaDeJogadores,
-    limparSelected,
-  } = useJogadorContext();
-  const { jogadoresReservas, setJogadoresReservas } =
-    useJogadoresReservasContext();
+  const { listaDeJogadores, alterarSelected, setListaDeJogadores } =
+    useJogadorContext();
+  const { setJogadoresReservas } = useJogadoresReservasContext();
+
+  const [modalAddVisible, setModalAddVisible] = useState(false);
 
   const handleSelect = (jogador) => {
     if (jogador !== null && jogador !== undefined) {
@@ -105,20 +102,32 @@ export default function ListadeJogadores() {
         </View>
         <View on style={styles.inputContainer}>
           <TouchableOpacity
-            onPress={() => alert(JSON.stringify(listaOrdenada, null, 2))}
+            onPress={() => setModalAddVisible(true)}
+            // onPress={() => alert(JSON.stringify(listaOrdenada, null, 2))}
             style={styles.inputButton}
           >
             <Text style={styles.inputButtonText}>Adicione um novo jogador</Text>
           </TouchableOpacity>
         </View>
+        <View style={styles.inputContainer}>
+          <TouchableOpacity
+            onPress={() => alert(JSON.stringify(listaOrdenada, null, 2))}
+            style={styles.inputButton}
+          >
+            <Text style={styles.inputButtonText}>Mostrar Objetos do Array</Text>
+          </TouchableOpacity>
+        </View>
       </View>
+      <Modal visible={modalAddVisible} transparent={true} animationType="slide">
+        <ModalAddProxima handleClose={() => setModalAddVisible(false)} />
+      </Modal>
     </View>
   );
 }
 const styles = StyleSheet.create({
   scrollView: {
     top: 30,
-    maxHeight: 430,
+    maxHeight: 330,
   },
   textTitle: {
     fontSize: 40,

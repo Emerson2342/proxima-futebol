@@ -21,25 +21,10 @@ export default function Times() {
     useJogadoresReservasContext();
   const { listaDeJogadores, setListaDeJogadores } = useJogadorContext();
 
-  const [timeTitular11, setTimeTitular11] = useState([
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-  ]);
-  const [timeTitular22, setTimeTitular22] = useState([
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-  ]);
-
   const removerJogador1 = (index) => {
-    const removedItem = timeTitular11[index];
+    const removedItem = timeTitular1[index];
     if (removedItem.id !== null) {
-      timeTitular11[index] = {
+      timeTitular1[index] = {
         id: null,
         jogador: "",
         gols: 0,
@@ -47,16 +32,16 @@ export default function Times() {
         selected: false,
       };
       setJogadoresReservas((prevLista) => prevLista.concat(removedItem));
-      setTimeTitular11([...timeTitular11]);
+      setTimeTitular1([...timeTitular1]);
     } else {
       alert("Posição está vazia!");
     }
   };
 
   const removerJogador2 = (index) => {
-    const removedItem = timeTitular22[index];
+    const removedItem = timeTitular2[index];
     if (removedItem.id !== null) {
-      timeTitular22[index] = {
+      timeTitular2[index] = {
         id: null,
         jogador: "",
         gols: 0,
@@ -64,20 +49,20 @@ export default function Times() {
         selected: false,
       };
       setJogadoresReservas((prevLista) => prevLista.concat(removedItem));
-      setTimeTitular22([...timeTitular22]);
+      setTimeTitular2([...timeTitular2]);
     } else {
       alert("Posição está vazia!");
     }
   };
 
   const adicionarJogador1 = (index) => {
-    const addItem = timeTitular11[index];
+    const addItem = timeTitular1[index];
     if (addItem.id == null) {
       if (jogadoresReservas.length > 0) {
         const jogadorReserva = jogadoresReservas[0];
-        timeTitular11[index] = jogadorReserva;
+        timeTitular1[index] = jogadorReserva;
         setJogadoresReservas((prevReservas) => prevReservas.slice(1));
-        setTimeTitular11([...timeTitular11]);
+        setTimeTitular1([...timeTitular1]);
       } else {
         alert("Não há mais jogadores na reserva!");
       }
@@ -85,13 +70,13 @@ export default function Times() {
   };
 
   const adicionarJogador2 = (index) => {
-    const addItem = timeTitular22[index];
+    const addItem = timeTitular2[index];
     if (addItem.id == null) {
       if (jogadoresReservas.length > 0) {
         const jogadorReserva = jogadoresReservas[0];
-        timeTitular22[index] = jogadorReserva;
+        timeTitular2[index] = jogadorReserva;
         setJogadoresReservas((prevReservas) => prevReservas.slice(1));
-        setTimeTitular22([...timeTitular22]);
+        setTimeTitular2([...timeTitular2]);
       } else {
         alert("Não há mais jogadores na reserva!");
       }
@@ -99,7 +84,7 @@ export default function Times() {
   };
 
   const gol1 = (index) => {
-    const jogador = timeTitular11[index];
+    const jogador = timeTitular1[index];
     if (jogador && jogador.id !== null && jogador.id !== undefined) {
       const jogadorNaLista = listaDeJogadores.find(
         (j) => j && j.id === jogador.id
@@ -116,7 +101,7 @@ export default function Times() {
   };
 
   const assist1 = (index) => {
-    const jogador = timeTitular11[index];
+    const jogador = timeTitular1[index];
     if (jogador && jogador.id !== null && jogador.id !== undefined) {
       const jogadorNaLista = listaDeJogadores.find(
         (j) => j && j.id === jogador.id
@@ -133,7 +118,7 @@ export default function Times() {
   };
 
   const gol2 = (index) => {
-    const jogador = timeTitular22[index];
+    const jogador = timeTitular2[index];
     if (jogador && jogador.id !== null && jogador.id !== undefined) {
       const jogadorNaLista = listaDeJogadores.find(
         (j) => j && j.id === jogador.id
@@ -150,7 +135,7 @@ export default function Times() {
   };
 
   const assist2 = (index) => {
-    const jogador = timeTitular22[index];
+    const jogador = timeTitular2[index];
     if (jogador && jogador.id !== null && jogador.id !== undefined) {
       const jogadorNaLista = listaDeJogadores.find(
         (j) => j && j.id === jogador.id
@@ -220,13 +205,13 @@ export default function Times() {
   );
 
   return (
-    <View style={{ marginTop: -70 }}>
+    <View style={{ marginTop: 0 }}>
       <Text style={[styles.timeText, { color: "#000" }]}>Escalação</Text>
       <View style={styles.container}>
         <View style={styles.timeContainer}>
           <Text style={styles.timeText}>Time 01</Text>
           <FlatList
-            data={timeTitular11}
+            data={timeTitular1}
             renderItem={renderItem1}
             keyExtractor={(item, index) =>
               item.id ? item.id.toString() : `empty_${index}`
@@ -236,7 +221,7 @@ export default function Times() {
         <View style={styles.timeContainer}>
           <Text style={styles.timeText}>Time 02</Text>
           <FlatList
-            data={timeTitular22}
+            data={timeTitular2}
             renderItem={renderItem2}
             keyExtractor={(item, index) =>
               item.id ? item.id.toString() : `empty_${index}`

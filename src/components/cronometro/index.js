@@ -8,7 +8,7 @@ import {
   Alert,
 } from "react-native";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
-import { FontAwesome } from "react-native-vector-icons";
+import { FontAwesome, AntDesign, Entypo } from "react-native-vector-icons";
 
 import CountDown from "react-native-countdown-component";
 
@@ -42,83 +42,78 @@ export default function Cronometro() {
 
   return (
     <View style={styles.container}>
-      <CountdownCircleTimer
-        key={key}
-        size={80}
-        isPlaying={playing}
-        duration={time < 0 ? 0 : time}
-        colors={["#89ff68", "#00fbff", "#FF0000", "#FF0000"]}
-        colorsTime={[20, 15, 10, 0]}
-        onComplete={() => {
-          Alert.alert("", "Fim de jogo");
-          handleReset();
-        }}
-        strokeWidth={7}
-        trailColor={"#cece"}
-      >
-        {({ remainingTime }) => (
-          <Text style={styles.tempoText}>
-            {`${Math.floor(remainingTime / 60)}:${String(
-              remainingTime % 60
-            ).padStart(2, "0")}`}
-          </Text>
-        )}
-      </CountdownCircleTimer>
-
       <View style={styles.button}>
-        <TouchableOpacity
+        <View
           style={{
-            width: "20%",
+            // backgroundColor: "#cece",
+            height: 100,
+            justifyContent: "space-around",
           }}
-          onPress={() => play()}
         >
-          <FontAwesome
-            name={playing ? "pause" : "play"}
-            size={25}
-            color={"#cece"}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
+          <TouchableOpacity onPress={() => play()}>
+            <AntDesign
+              name={playing ? "pause" : "caretright"}
+              size={50}
+              color={"#cece"}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{ alignItems: "center" }}
+            onPress={() => handleReset()}
+          >
+            <Entypo name={"cw"} size={25} color={"#cece"} />
+          </TouchableOpacity>
+        </View>
+        <CountdownCircleTimer
+          key={key}
+          size={100}
+          isPlaying={playing}
+          duration={time < 0 ? 0 : time}
+          colors={["#89ff68", "#00fbff", "#FF0000", "#FF0000"]}
+          colorsTime={[20, 15, 10, 0]}
+          onComplete={() => {
+            Alert.alert("", "Fim de jogo");
+            handleReset();
+          }}
+          strokeWidth={8}
+          trailColor={"#cece"}
+        >
+          {({ remainingTime }) => (
+            <Text style={styles.tempoText}>
+              {`${Math.floor(remainingTime / 60)}:${String(
+                remainingTime % 60
+              ).padStart(2, "0")}`}
+            </Text>
+          )}
+        </CountdownCircleTimer>
+        <View
           style={{
-            width: "20%",
+            //backgroundColor: "#fafa",
+            height: 100,
+            justifyContent: "space-around",
           }}
-          onPress={() => handleReset()}
         >
-          <FontAwesome name={"refresh"} size={20} color={"#cece"} />
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={{
-            width: "20%",
-          }}
-          onPress={() => handleIncrement()}
-        >
-          <FontAwesome name={"caret-up"} size={40} color={"#cece"} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            width: "20%",
-          }}
-          onPress={() => handleDecrement()}
-        >
-          <FontAwesome name={"caret-down"} size={40} color={"#cece"} />
-        </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleIncrement()}>
+            <FontAwesome name={"plus"} size={30} color={"#cece"} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => handleDecrement()}>
+            <FontAwesome name={"minus"} size={30} color={"#cece"} />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    top: -10,
-    width: "60%",
+    top: -20,
     justifyContent: "space-between",
     alignSelf: "center",
-    marginLeft: 130,
     flexDirection: "row",
   },
   tempoText: {
     color: "#cece",
-    fontSize: 25,
+    fontSize: 30,
     fontWeight: "bold",
   },
   button: {
@@ -126,5 +121,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    //backgroundColor: "#fafa",
   },
 });
