@@ -93,8 +93,6 @@ export default function ListadeJogadores() {
       setModalNomeVisible(false)
     }
   };
-
-
   const handleSelect = (jogador) => {
     if (jogador !== null && jogador !== undefined) {
       alterarSelected(jogador, !jogador.selected);
@@ -128,9 +126,11 @@ export default function ListadeJogadores() {
     );
   };
 
+
   const listaOrdenada = [...listaDeJogadores]
     .filter((item) => item !== null && item !== undefined)
     .sort((a, b) => a.jogador.localeCompare(b.jogador));
+
 
   const renderItem = ({ item, index }) => (
     <MotiView
@@ -157,6 +157,7 @@ export default function ListadeJogadores() {
     </MotiView>
   );
 
+
   return (
     <View style={styles.container}>
       <Text
@@ -174,6 +175,7 @@ export default function ListadeJogadores() {
         numColumns={2}
         columnWrapperStyle={{ justifyContent: "space-between" }}
       />
+
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -202,7 +204,7 @@ export default function ListadeJogadores() {
         visible={modalNomeVisible} transparent={true} animationType='slide'
       >
         <ModalEditarNome
-          handleEdit={() => handleEdit(idParaEditar, novoNome, setNovoNome)} // Passando handleEdit corretamente
+          handleEdit={() => handleEdit(idParaEditar, novoNome, setNovoNome)}
           handleClose={() => setModalNomeVisible(false)}
           novoNome={novoNome}
           setNovoNome={setNovoNome}
@@ -211,9 +213,61 @@ export default function ListadeJogadores() {
 
       </Modal>
     </View>
+
   );
 }
 const styles = StyleSheet.create({
+  scrollView: {
+    top: 30,
+    height: 460,
+    paddingLeft: 7,
+    paddingRight: 7,
+  },
+  textTitle: {
+    fontSize: 40,
+    textAlign: "center",
+    flexWrap: "nowrap",
+    width: "100%",
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  jogadorContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: 180,
+    height: 40,
+    marginVertical: 7,
+    borderColor: "#20473c",
+    backgroundColor: "#fff",
+    elevation: 3,
+    borderRadius: 7,
+  },
+  jogadorContainerSelected: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: 180,
+    height: 40,
+    marginVertical: 7,
+    backgroundColor: "#20473c",
+    borderRadius: 7,
+    elevation: 3,
+  },
+  jogadorText: {
+    color: "#000",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 17,
+    flexWrap: "wrap",
+    flex: 1,
+  },
+  jogadorTextSelected: {
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 17,
+    flexWrap: "wrap",
+    flex: 1,
+  },
   scrollView: {
     top: 30,
     height: 460,
@@ -275,11 +329,18 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "90%",
   },
+  inputContainer: {
+    alignSelf: "center",
+    top: 15,
+    backgroundColor: "#20473c",
+    borderRadius: 10,
+    marginBottom: 10,
+    padding: 10,
+    width: "90%",
+  },
 
   container: {
     top: -85,
-    // marginLeft: 10,
-    //marginRight: 10,
   },
   inputButtonText: {
     textAlign: "center",

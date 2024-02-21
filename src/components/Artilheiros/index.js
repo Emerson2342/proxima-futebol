@@ -76,6 +76,7 @@ export default function Artilheiros() {
       </View>
     </View>
   );
+
 }
 const styles = StyleSheet.create({
   container: {

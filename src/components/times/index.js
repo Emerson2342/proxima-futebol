@@ -37,10 +37,8 @@ export default function Times() {
         assist: 0,
         selected: false,
       };
-
       setJogadoresReservas((prevLista) => prevLista.concat(removedItem));
       setTimeTitular1([...timeTitular1]);
-
 
     } else {
       Alert.alert("", "Posição vazia!");
@@ -214,6 +212,7 @@ export default function Times() {
     </View>
   );
 
+
   return (
     <View style={{ marginTop: 0 }}>
       <Text style={[styles.timeText, { color: "#000" }]}>Escalação</Text>
@@ -241,8 +240,9 @@ export default function Times() {
       </View>
     </View>
   );
-}
 
+
+}
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
