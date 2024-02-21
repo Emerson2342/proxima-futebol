@@ -43,24 +43,15 @@ export default function Cronometro() {
   return (
     <View style={styles.container}>
       <View style={styles.button}>
-        <View
-          style={{
-            // backgroundColor: "#cece",
-            height: 100,
-            justifyContent: "space-around",
-          }}
-        >
+        <View style={styles.buttonContent}>
           <TouchableOpacity onPress={() => play()}>
             <AntDesign
               name={playing ? "pause" : "caretright"}
-              size={50}
+              size={40}
               color={"#cece"}
             />
           </TouchableOpacity>
-          <TouchableOpacity
-            style={{ alignItems: "center" }}
-            onPress={() => handleReset()}
-          >
+          <TouchableOpacity onPress={() => handleReset()}>
             <Entypo name={"cw"} size={25} color={"#cece"} />
           </TouchableOpacity>
         </View>
@@ -86,13 +77,7 @@ export default function Cronometro() {
             </Text>
           )}
         </CountdownCircleTimer>
-        <View
-          style={{
-            //backgroundColor: "#fafa",
-            height: 100,
-            justifyContent: "space-around",
-          }}
-        >
+        <View style={styles.buttonContent}>
           <TouchableOpacity onPress={() => handleIncrement()}>
             <FontAwesome name={"plus"} size={30} color={"#cece"} />
           </TouchableOpacity>
@@ -117,10 +102,15 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   button: {
-    width: "60%",
+    width: "70%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    //backgroundColor: "#fafa",
+  },
+  buttonContent: {
+    width: "20%",
+    height: 80,
+    justifyContent: "space-around",
+    alignItems: "center",
   },
 });

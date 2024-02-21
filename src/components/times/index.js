@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import {
   View,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  Alert,
 } from "react-native";
 import { FontAwesome, Entypo, AntDesign } from "@expo/vector-icons";
 import { MotiView, MotiText } from "moti";
@@ -20,6 +21,11 @@ export default function Times() {
   const { jogadoresReservas, setJogadoresReservas } =
     useJogadoresReservasContext();
   const { listaDeJogadores, setListaDeJogadores } = useJogadorContext();
+
+  useEffect(() => {
+    // Este alert será executado apenas na montagem inicial da tela
+    Alert.alert("", "Bem vindo à Lista de Próximas!!");
+  }, []);
 
   const removerJogador1 = (index) => {
     const removedItem = timeTitular1[index];

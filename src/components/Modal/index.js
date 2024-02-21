@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   View,
   Text,
@@ -7,36 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { useJogadorContext } from "../../context/JogadoresContext";
-
-export function ModalAddProxima({ handleClose }) {
-  const { listaDeJogadores, setListaDeJogadores } = useJogadorContext();
-
-  const [id, setId] = useState(25);
-  const [nome, setNome] = useState("");
-  const [novoJogador, setNovoJogador] = useState({
-    id: id,
-    jogador: "",
-    gols: 0,
-    assist: 0,
-    selected: false,
-  });
-
-  const handleSalvar = () => {
-    /* const addNovoJogador = {
-      ...novoJogador,
-      id: id,
-      jogador: nome,
-    };
-
-    const novaListaDeJogadores = [...listaDeJogadores, addNovoJogador];
-    setListaDeJogadores(novaListaDeJogadores); */
-    // setId(id + 1);
-    alert(id);
-    setId((prevId) => prevId + 1);
-    handleClose();
-  };
-
+export function ModalAddProxima({ handleClose, handleSalvar, nome, setNome }) {
   return (
     <View style={styles.container}>
       <View style={styles.content}>

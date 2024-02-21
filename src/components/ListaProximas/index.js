@@ -23,10 +23,10 @@ export default function ListaProximas() {
     });
   };
 
-  const handleConfirmar = (item, index) => {
+  const handleConfirmar = (jogador, index) => {
     Alert.alert(
       "Confirmação",
-      `Tem certeza que deseja excluir ${item[0]} da lista de próximas?`,
+      `Deseja excluir ${jogador} da lista de próximas?`,
       [
         { text: "Cancelar", style: "cancel" },
         { text: "Confirmar", onPress: () => handleDelete(index) },
@@ -62,7 +62,9 @@ export default function ListaProximas() {
         opacity: 1,
       }}
     >
-      <TouchableOpacity onLongPress={() => handleConfirmar(item, index)}>
+      <TouchableOpacity
+        onLongPress={() => handleConfirmar(item.jogador, index)}
+      >
         <View style={styles.jogadorContainer}>
           <Text style={styles.jogadorText}>{item.jogador}</Text>
         </View>
@@ -73,31 +75,32 @@ export default function ListaProximas() {
   return (
     <View>
       <Text style={styles.textTitle}> Banco de Reservas</Text>
-
-      <FlatList
-        style={styles.scrollView}
-        data={jogadoresReservas}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={renderItem}
-        numColumns={2}
-        columnWrapperStyle={{ justifyContent: "space-between" }}
-      />
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TouchableOpacity
-            style={styles.inputButton}
-            onLongPress={() => misturarReservas()}
-          >
-            <Text style={styles.inputButtonText}>Segure Para Misturar</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.inputContainer}>
-          <TouchableOpacity
-            style={styles.inputButton}
-            onPress={handleConfirmarTodos}
-          >
-            <Text style={styles.inputButtonText}>Limpar Próximas</Text>
-          </TouchableOpacity>
+      <View style={{ top: -55 }}>
+        <FlatList
+          style={styles.scrollView}
+          data={jogadoresReservas}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={renderItem}
+          numColumns={2}
+          columnWrapperStyle={{ justifyContent: "space-between" }}
+        />
+        <View style={styles.container}>
+          <View style={styles.inputContainer}>
+            <TouchableOpacity
+              style={styles.inputButton}
+              onLongPress={() => misturarReservas()}
+            >
+              <Text style={styles.inputButtonText}>Segure Para Misturar</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.inputContainer}>
+            <TouchableOpacity
+              style={styles.inputButton}
+              onPress={handleConfirmarTodos}
+            >
+              <Text style={styles.inputButtonText}>Limpar Próximas</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>
@@ -105,13 +108,12 @@ export default function ListaProximas() {
 }
 const styles = StyleSheet.create({
   scrollView: {
-    top: -40,
-    maxHeight: 420,
+    height: 450,
     paddingLeft: 7,
     paddingRight: 7,
   },
   textTitle: {
-    top: -70,
+    top: -85,
     fontSize: 40,
     textAlign: "center",
     flexWrap: "nowrap",
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
   jogadorContainer: {
     justifyContent: "center",
     width: 180,
-    height: 45,
+    height: 40,
     marginTop: 5,
     marginBottom: 5,
     backgroundColor: "#ffff",
@@ -137,11 +139,13 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   inputContainer: {
-    backgroundColor: "#3f8d65",
+    alignSelf: "center",
+    top: 15,
+    backgroundColor: "#20473c",
     borderRadius: 10,
     marginBottom: 10,
     padding: 10,
-    width: "100%",
+    width: "90%",
   },
   inputButton: {
     alignItems: "center",
@@ -153,14 +157,10 @@ const styles = StyleSheet.create({
     bottom: "auto",
   },
   container: {
-    position: "absolute",
-    paddingLeft: 20,
-    paddingRight: 20,
-    top: 450,
+    // paddingLeft: 20,
+    //paddingRight: 20,
     textAlign: "center",
     alignItems: "center",
     width: "100%",
   },
 });
-
-("");

@@ -6,18 +6,72 @@ import {
   FlatList,
   Modal,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { MotiView } from "moti";
 import { ModalAddProxima } from "../Modal";
 import { useJogadorContext } from "../../context/JogadoresContext";
 import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
+import { useIdentificadorContext } from "../../context/IdentificadorContext";
 
 export default function ListadeJogadores() {
   const { listaDeJogadores, alterarSelected, setListaDeJogadores } =
     useJogadorContext();
   const { setJogadoresReservas } = useJogadoresReservasContext();
 
+  const { identificador, setIdentificador } = useIdentificadorContext();
+
   const [modalAddVisible, setModalAddVisible] = useState(false);
+  const [nome, setNome] = useState("");
+  const [novoJogador, setNovoJogador] = useState({
+    id: identificador,
+    jogador: "",
+    gols: 0,
+    assist: 0,
+    selected: false,
+  });
+
+  const handleSalvar = () => {
+    const novoJogadorAtualizado = {
+      ...novoJogador,
+      id: identificador,
+      jogador: nome,
+    };
+
+    const novaListaDeJogadores = [...listaDeJogadores, novoJogadorAtualizado];
+    setListaDeJogadores(novaListaDeJogadores);
+    setIdentificador((prevId) => prevId + 1);
+    setModalAddVisible(false);
+    alert(JSON.stringify(novoJogadorAtualizado, null, 2));
+    setNome("");
+  };
+
+  const handleConfirmar = (id, jogador) => {
+    Alert.alert(
+      "",
+      `Deseja excluir ${jogador} da lista de jogadores?`,
+      [
+        { text: "Cancelar", style: "cancel" },
+        { text: "Confirmar", onPress: () => handleDelete(id) },
+      ],
+      { cancelable: false }
+    );
+  };
+
+  const handleDelete = (id) => {
+    console.log("ID recebido:", id);
+
+    const indexToDelete = listaDeJogadores.findIndex((item) => item.id === id);
+    console.log("Index do item a ser deletado:", indexToDelete);
+
+    if (indexToDelete !== -1) {
+      const novaLista = [...listaDeJogadores];
+      novaLista.splice(indexToDelete, 1);
+      setListaDeJogadores(novaLista);
+    } else {
+      console.log("ID não encontrado na listaDeJogadores.");
+    }
+  };
 
   const handleSelect = (jogador) => {
     if (jogador !== null && jogador !== undefined) {
@@ -32,7 +86,9 @@ export default function ListadeJogadores() {
       const jogadoresSelecionados = listaDeJogadores.filter(
         (jogador) => jogador && jogador.selected
       );
-
+      if (jogadoresSelecionados <= 0) {
+        Alert.alert("", "Nenhum jogador selecionado");
+      }
       const jogadoresNaoPresentes = jogadoresSelecionados.filter(
         (jogadorSelecionado) =>
           !prevReserva.some((j) => j.id === jogadorSelecionado.id)
@@ -66,6 +122,7 @@ export default function ListadeJogadores() {
             : styles.jogadorContainer
         }
         onPress={() => handleSelect(item)}
+        onLongPress={() => handleConfirmar(item.id, item.jogador)}
       >
         <Text
           style={
@@ -80,7 +137,12 @@ export default function ListadeJogadores() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.textTitle}>Jogadores</Text>
+      <Text
+        onPress={() => alert(JSON.stringify(listaDeJogadores, null, 2))}
+        style={styles.textTitle}
+      >
+        Jogadores
+      </Text>
 
       <FlatList
         style={styles.scrollView}
@@ -92,34 +154,27 @@ export default function ListadeJogadores() {
       />
 
       <View style={styles.buttonContainer}>
-        <View style={styles.inputContainer}>
-          <TouchableOpacity
-            onPress={() => addParaReserva()}
-            style={styles.inputButton}
-          >
-            <Text style={styles.inputButtonText}>Adicionar para a reserva</Text>
-          </TouchableOpacity>
-        </View>
-        <View on style={styles.inputContainer}>
-          <TouchableOpacity
-            onPress={() => setModalAddVisible(true)}
-            // onPress={() => alert(JSON.stringify(listaOrdenada, null, 2))}
-            style={styles.inputButton}
-          >
-            <Text style={styles.inputButtonText}>Adicione um novo jogador</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.inputContainer}>
-          <TouchableOpacity
-            onPress={() => alert(JSON.stringify(listaOrdenada, null, 2))}
-            style={styles.inputButton}
-          >
-            <Text style={styles.inputButtonText}>Mostrar Objetos do Array</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={() => addParaReserva()}
+          style={styles.inputContainer}
+        >
+          <Text style={styles.inputButtonText}>Enviar para a reserva</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => setModalAddVisible(true)}
+          style={styles.inputContainer}
+        >
+          <Text style={styles.inputButtonText}>Adicione um novo jogador</Text>
+        </TouchableOpacity>
       </View>
       <Modal visible={modalAddVisible} transparent={true} animationType="slide">
-        <ModalAddProxima handleClose={() => setModalAddVisible(false)} />
+        <ModalAddProxima
+          nome={nome}
+          setNome={setNome}
+          handleSalvar={() => handleSalvar()}
+          handleClose={() => setModalAddVisible(false)}
+        />
       </Modal>
     </View>
   );
@@ -127,7 +182,9 @@ export default function ListadeJogadores() {
 const styles = StyleSheet.create({
   scrollView: {
     top: 30,
-    maxHeight: 330,
+    height: 460,
+    paddingLeft: 7,
+    paddingRight: 7,
   },
   textTitle: {
     fontSize: 40,
@@ -178,16 +235,17 @@ const styles = StyleSheet.create({
   inputContainer: {
     alignSelf: "center",
     top: 15,
-    backgroundColor: "#3f8d65",
+    backgroundColor: "#20473c",
     borderRadius: 10,
     marginBottom: 10,
     padding: 10,
+    width: "90%",
   },
 
   container: {
-    top: -70,
-    marginLeft: 10,
-    marginRight: 10,
+    top: -85,
+    // marginLeft: 10,
+    //marginRight: 10,
   },
   inputButtonText: {
     textAlign: "center",
@@ -198,8 +256,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 20,
-    paddingLeft: 5,
-    paddingRight: 5,
+    // paddingLeft: 5,
+    //paddingRight: 5,
     justifyContent: "center",
     width: "100%",
   },

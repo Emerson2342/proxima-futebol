@@ -4,21 +4,23 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const TimeContext = createContext();
 
 export const TimeProvider = ({ children }) => {
-  const [timeTitular1, setTimeTitular1] = useState([
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-  ]);
+  const createEmptyPlayer = () => [
+    {
+      id: null,
+      jogador: "",
+      gols: 0,
+      assist: 0,
+      selected: false,
+    },
+  ];
 
-  const [timeTitular2, setTimeTitular2] = useState([
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-    { id: null, jogador: "", gols: 0, assist: 0, selected: false },
-  ]);
+  const [timeTitular1, setTimeTitular1] = useState(
+    Array.from({ length: 5 }, createEmptyPlayer)
+  );
+
+  const [timeTitular2, setTimeTitular2] = useState(
+    Array.from({ length: 5 }, createEmptyPlayer)
+  );
 
   // Carregar dados do AsyncStorage na inicialização
   useEffect(() => {
