@@ -1,18 +1,22 @@
-import React, { useState, useContext, useEffect } from "react";
-import { StyleSheet, Text, View, FlatList, Image } from "react-native";
+import React from "react";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 import { useJogadorContext } from "../../context/JogadoresContext";
 
 export default function Artilheiros() {
   const { listaDeJogadores } = useJogadorContext();
-  const gols = listaDeJogadores
 
+  const gols = listaDeJogadores
     .filter((item) => item !== null)
     .sort((a, b) => {
       if (b.gols !== a.gols) {
         return b.gols - a.gols;
+      } else if (b.assist !== a.assist) {
+        return b.assist - a.assist;
+      } else {
+        return a.jogador.localeCompare(b.jogador);
       }
-      return b.assist - a.assist;
     });
+
 
   const renderItemGols = ({ item, index }) => {
     const ordem = index + 1;
@@ -44,10 +48,6 @@ export default function Artilheiros() {
 
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.imagemCampo}
-        source={require("../../../assets/icon.png")}
-      />
 
       <Text style={styles.titulo}>Gols e Assistências</Text>
       <View style={styles.column}>
@@ -76,6 +76,7 @@ export default function Artilheiros() {
       </View>
     </View>
   );
+
 }
 const styles = StyleSheet.create({
   container: {
@@ -148,13 +149,5 @@ const styles = StyleSheet.create({
     color: "#20473c",
     fontSize: 15,
     textAlign: "left",
-  },
-  imagemCampo: {
-    opacity: 0.3,
-    objectFit: "contain",
-    width: 350,
-    height: 600,
-    position: "absolute",
-    //resizeMode: 'stretch',
-  },
+  }
 });

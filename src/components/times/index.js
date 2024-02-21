@@ -39,8 +39,9 @@ export default function Times() {
       };
       setJogadoresReservas((prevLista) => prevLista.concat(removedItem));
       setTimeTitular1([...timeTitular1]);
+
     } else {
-      alert("Posição está vazia!");
+      Alert.alert("", "Posição vazia!");
     }
   };
 
@@ -56,8 +57,9 @@ export default function Times() {
       };
       setJogadoresReservas((prevLista) => prevLista.concat(removedItem));
       setTimeTitular2([...timeTitular2]);
+
     } else {
-      alert("Posição está vazia!");
+      Alert.alert("", "Posição vazia");
     }
   };
 
@@ -70,9 +72,9 @@ export default function Times() {
         setJogadoresReservas((prevReservas) => prevReservas.slice(1));
         setTimeTitular1([...timeTitular1]);
       } else {
-        alert("Não há mais jogadores na reserva!");
+        Alert.alert("", "Não há mais jogadores na reserva!");
       }
-    } else alert("Jogador precisa sair antes!");
+    } else Alert.alert("", "Jogador precisa sair antes!");
   };
 
   const adicionarJogador2 = (index) => {
@@ -84,9 +86,9 @@ export default function Times() {
         setJogadoresReservas((prevReservas) => prevReservas.slice(1));
         setTimeTitular2([...timeTitular2]);
       } else {
-        alert("Não há mais jogadores na reserva!");
+        Alert.alert("", "Não há mais jogadores na reserva!");
       }
-    } else alert("Jogador precisa sair antes!");
+    } else Alert.alert("", "Jogador precisa sair antes!");
   };
 
   const gol1 = (index) => {
@@ -99,10 +101,10 @@ export default function Times() {
         jogadorNaLista.gols += 1;
         setListaDeJogadores([...listaDeJogadores]);
       } else {
-        alert("Jogador não encontrado na listaDeJogadores!");
+        Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
     } else {
-      alert("Jogador inválido ou sem ID!");
+      Alert.alert("", "Posição vazia!");
     }
   };
 
@@ -116,10 +118,10 @@ export default function Times() {
         jogadorNaLista.assist += 1;
         setListaDeJogadores([...listaDeJogadores]);
       } else {
-        alert("Jogador não encontrado na listaDeJogadores!");
+        Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
     } else {
-      alert("Jogador inválido ou sem ID!");
+      Alert.alert("", "Posição vazia!");
     }
   };
 
@@ -133,10 +135,10 @@ export default function Times() {
         jogadorNaLista.gols += 1;
         setListaDeJogadores([...listaDeJogadores]);
       } else {
-        alert("Jogador não encontrado na listaDeJogadores!");
+        Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
     } else {
-      alert("Jogador inválido ou sem ID!");
+      Alert.alert("", "Posição vazia!");
     }
   };
 
@@ -150,10 +152,10 @@ export default function Times() {
         jogadorNaLista.assist += 1;
         setListaDeJogadores([...listaDeJogadores]);
       } else {
-        alert("Jogador não encontrado na listaDeJogadores!");
+        Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
     } else {
-      alert("Jogador inválido ou sem ID!");
+      Alert.alert("", "Posição vazia!");
     }
   };
 
@@ -210,6 +212,7 @@ export default function Times() {
     </View>
   );
 
+
   return (
     <View style={{ marginTop: 0 }}>
       <Text style={[styles.timeText, { color: "#000" }]}>Escalação</Text>
@@ -237,8 +240,9 @@ export default function Times() {
       </View>
     </View>
   );
-}
 
+
+}
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",

@@ -4,7 +4,7 @@
     "slug": "proxima",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iconAndroid.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/icon.png",
@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
+        "foregroundImage": "./assets/iconAndroid.png",
         "backgroundColor": "#3f8d65"
       },
       "package": "com.missinhoo.proxima"

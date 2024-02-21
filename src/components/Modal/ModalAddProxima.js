@@ -8,12 +8,15 @@ import {
 } from "react-native";
 
 export function ModalAddProxima({ handleClose, handleSalvar, nome, setNome }) {
+
+
   return (
     <View style={styles.container}>
       <View style={styles.content}>
+        <Text style={styles.text}>Adicionar Novo Jogador</Text>
         <TextInput
           style={styles.input}
-          placeholder="Digite um nome"
+          placeholder="Digite o nome do jogador"
           value={nome}
           onChangeText={(text) => setNome(text)}
         />
@@ -52,6 +55,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 7,
   },
+  text: {
+    fontSize: 25,
+    fontWeight: "bold",
+    paddingBottom: 15,
+    color: "#20473c"
+  },
 
   input: {
     borderWidth: 1,
@@ -60,7 +69,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 7,
     borderColor: "#20473c",
-    // color: "#003b6b"
+    textAlign: "center"
   },
   buttonArea: {
     flexDirection: "row",

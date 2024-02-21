@@ -9,7 +9,8 @@ import {
   Alert,
 } from "react-native";
 import { MotiView } from "moti";
-import { ModalAddProxima } from "../Modal";
+import { ModalAddProxima } from "../Modal/ModalAddProxima";
+import { ModalEditarNome } from "../Modal/ModalEditarNome";
 import { useJogadorContext } from "../../context/JogadoresContext";
 import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
 import { useIdentificadorContext } from "../../context/IdentificadorContext";
@@ -22,7 +23,12 @@ export default function ListadeJogadores() {
   const { identificador, setIdentificador } = useIdentificadorContext();
 
   const [modalAddVisible, setModalAddVisible] = useState(false);
+  const [modalNomeVisible, setModalNomeVisible] = useState(false);
+  const [idParaEditar, setIdParaEditar] = useState(null);
+  const [nomeParaEditar, setNomeParaEditar] = useState('')
+
   const [nome, setNome] = useState("");
+  const [novoNome, setNovoNome] = useState(null);
   const [novoJogador, setNovoJogador] = useState({
     id: identificador,
     jogador: "",
@@ -43,36 +49,50 @@ export default function ListadeJogadores() {
     setIdentificador((prevId) => prevId + 1);
     setModalAddVisible(false);
     alert(JSON.stringify(novoJogadorAtualizado, null, 2));
-    setNome("");
+    setNome('');
   };
 
   const handleConfirmar = (id, jogador) => {
+
+    setIdParaEditar(id);
+    setNomeParaEditar(jogador)
     Alert.alert(
-      "",
-      `Deseja excluir ${jogador} da lista de jogadores?`,
+      "Jogador",
+      `${jogador}`,
       [
         { text: "Cancelar", style: "cancel" },
-        { text: "Confirmar", onPress: () => handleDelete(id) },
+        { text: "Apagar Jogador", onPress: () => handleDelete(id) },
+        { text: "Editar nome", onPress: () => setModalNomeVisible(true) },
+
       ],
       { cancelable: false }
     );
   };
 
   const handleDelete = (id) => {
-    console.log("ID recebido:", id);
-
     const indexToDelete = listaDeJogadores.findIndex((item) => item.id === id);
-    console.log("Index do item a ser deletado:", indexToDelete);
 
     if (indexToDelete !== -1) {
       const novaLista = [...listaDeJogadores];
       novaLista.splice(indexToDelete, 1);
       setListaDeJogadores(novaLista);
     } else {
-      console.log("ID não encontrado na listaDeJogadores.");
+      Alert.alert("ID não encontrado na Lista de Jogadores!");
     }
   };
 
+  const handleEdit = (id, novoNome) => {
+    const indexToEdit = listaDeJogadores.findIndex((item) => item.id === id);
+    if (indexToEdit !== -1) {
+      const novaLista = [...listaDeJogadores];
+      novaLista[indexToEdit] = {
+        ...novaLista[indexToEdit],
+        jogador: novoNome,
+      };
+      setListaDeJogadores(novaLista);
+      setModalNomeVisible(false)
+    }
+  };
   const handleSelect = (jogador) => {
     if (jogador !== null && jogador !== undefined) {
       alterarSelected(jogador, !jogador.selected);
@@ -106,9 +126,11 @@ export default function ListadeJogadores() {
     );
   };
 
+
   const listaOrdenada = [...listaDeJogadores]
     .filter((item) => item !== null && item !== undefined)
     .sort((a, b) => a.jogador.localeCompare(b.jogador));
+
 
   const renderItem = ({ item, index }) => (
     <MotiView
@@ -135,6 +157,7 @@ export default function ListadeJogadores() {
     </MotiView>
   );
 
+
   return (
     <View style={styles.container}>
       <Text
@@ -152,6 +175,7 @@ export default function ListadeJogadores() {
         numColumns={2}
         columnWrapperStyle={{ justifyContent: "space-between" }}
       />
+
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -176,10 +200,74 @@ export default function ListadeJogadores() {
           handleClose={() => setModalAddVisible(false)}
         />
       </Modal>
+      <Modal
+        visible={modalNomeVisible} transparent={true} animationType='slide'
+      >
+        <ModalEditarNome
+          handleEdit={() => handleEdit(idParaEditar, novoNome, setNovoNome)}
+          handleClose={() => setModalNomeVisible(false)}
+          novoNome={novoNome}
+          setNovoNome={setNovoNome}
+          nomeAtual={nomeParaEditar}
+        />
+
+      </Modal>
     </View>
+
   );
 }
 const styles = StyleSheet.create({
+  scrollView: {
+    top: 30,
+    height: 460,
+    paddingLeft: 7,
+    paddingRight: 7,
+  },
+  textTitle: {
+    fontSize: 40,
+    textAlign: "center",
+    flexWrap: "nowrap",
+    width: "100%",
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  jogadorContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: 180,
+    height: 40,
+    marginVertical: 7,
+    borderColor: "#20473c",
+    backgroundColor: "#fff",
+    elevation: 3,
+    borderRadius: 7,
+  },
+  jogadorContainerSelected: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: 180,
+    height: 40,
+    marginVertical: 7,
+    backgroundColor: "#20473c",
+    borderRadius: 7,
+    elevation: 3,
+  },
+  jogadorText: {
+    color: "#000",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 17,
+    flexWrap: "wrap",
+    flex: 1,
+  },
+  jogadorTextSelected: {
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 17,
+    flexWrap: "wrap",
+    flex: 1,
+  },
   scrollView: {
     top: 30,
     height: 460,
@@ -241,11 +329,18 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "90%",
   },
+  inputContainer: {
+    alignSelf: "center",
+    top: 15,
+    backgroundColor: "#20473c",
+    borderRadius: 10,
+    marginBottom: 10,
+    padding: 10,
+    width: "90%",
+  },
 
   container: {
     top: -85,
-    // marginLeft: 10,
-    //marginRight: 10,
   },
   inputButtonText: {
     textAlign: "center",
