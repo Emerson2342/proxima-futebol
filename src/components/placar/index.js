@@ -1,49 +1,83 @@
-import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { MotiView, MotiText } from "moti";
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Modal, TouchableOpacity } from 'react-native';
+
+import { ModalEditarNomeTime } from '../Modal/ModalEditarNomeTime';
+import { usePlacarContext } from "../../context/PlacarContext";
 
 export default function Placar() {
-  return (
-    <View style={styles.placarContainer}>
-      <View style={styles.timeContainer}>
-        <Text style={styles.textPlacar}>1</Text>
-        <Text style={styles.textTime}> Time 01</Text>
-      </View>
-      <View style={styles.timeContainer}>
-        <Text style={styles.textPlacar}>1</Text>
-        <Text style={styles.textTime}> Time 02</Text>
-      </View>
-    </View>
-  );
+
+    const { placar, setPlacar } = usePlacarContext();
+
+    const [indexToEdit, setIndexToEdit] = useState(0)
+    const [editarNomeVisible, setEditarNomeVisible] = useState(false);
+
+    const golsTime1 = placar.find(time => time.id === 1)?.gols || 0;
+    const golsTime2 = placar.find(time => time.id === 2)?.gols || 0;
+
+    const nomeTime1 = placar.find(time => time.id === 1)?.time || "Time 1";
+    const nomeTime2 = placar.find(time => time.id === 2)?.time || "Time 2";
+
+
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.timeContainer}>
+                <TouchableOpacity
+                    onPress={() => {
+                        setEditarNomeVisible(true);
+                        setIndexToEdit(1)
+                    }}
+                    style={{ width: "75%" }}>
+                    <Text style={[styles.text, { color: "#3f8d65" }]}>{nomeTime1}</Text>
+                </TouchableOpacity>
+                <View style={{ width: "25%" }}>
+                    <Text style={styles.text}>{golsTime1}</Text>
+                </View>
+            </View>
+            <Text style={styles.text}>X</Text>
+            <View style={styles.timeContainer}>
+                <View style={{ width: "25%" }}>
+                    <Text style={styles.text}>{golsTime2}</Text>
+                </View>
+                <TouchableOpacity
+                    onPress={() => {
+                        setEditarNomeVisible(true);
+                        setIndexToEdit(2);
+                    }}
+                    style={{ width: "75%" }}>
+                    <Text style={[styles.text, { color: "#3f8d65" }]}>{nomeTime2}</Text>
+                </TouchableOpacity>
+            </View>
+            <Modal
+                visible={editarNomeVisible}
+                transparent={true}
+                animationType='fade'
+            >
+                <ModalEditarNomeTime
+                    handleClose={() => setEditarNomeVisible(false)}
+                    indexToEdit={indexToEdit}
+
+                />
+            </Modal>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  placarContainer: {
-    display: "none",
-    top: -85,
-    width: "30%",
-    marginLeft: 10,
-  },
-  timeContainer: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginVertical: 5,
-  },
-  textPlacar: {
-    width: "15%",
-    fontSize: 20,
-    textAlign: "center",
-    fontWeight: "bold",
-    backgroundColor: "#cece",
-    borderRadius: 5,
-  },
-  textTime: {
-    width: "75%",
-    fontSize: 20,
-    fontWeight: "bold",
-    backgroundColor: "#cece",
-    borderRadius: 5,
-    textAlign: "center",
-  },
-});
+    container: {
+        flexDirection: "row",
+        justifyContent: 'space-between',
+        margin: 5,
+    },
+    timeContainer: {
+        flexDirection: 'row',
+        width: "47%",
+        overflow: "hidden",
+    },
+    text: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    }
+})
+

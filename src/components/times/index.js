@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -7,9 +7,14 @@ import {
   Image,
   FlatList,
   Alert,
+  Modal
 } from "react-native";
 import { FontAwesome, Entypo, AntDesign } from "@expo/vector-icons";
 import { MotiView, MotiText } from "moti";
+
+import ModalBemVindo from "../Modal/ModalBemVindo";
+import ModalPosicaoVazia from "../Modal/ModalPosicaoVazia";
+import ModalReservaVazia from "../Modal/ModalReservaVazia";
 
 import { useJogadorContext } from "../../context/JogadoresContext";
 import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
@@ -22,14 +27,18 @@ export default function Times() {
     useJogadoresReservasContext();
   const { listaDeJogadores, setListaDeJogadores } = useJogadorContext();
 
+  const [bemVindoVisible, setBemVindoVisible] = useState(false);
+  const [posicaoVaziaVisible, setPosicaoVaziaVisible] = useState(false);
+  const [reservaVaziaVisible, setReservaVaziaVisible] = useState(false);
+
+
   useEffect(() => {
-    // Este alert será executado apenas na montagem inicial da tela
-    Alert.alert("", "Bem vindo à Lista de Próximas!!");
+    setBemVindoVisible(true);
   }, []);
 
   const removerJogador1 = (index) => {
     const removedItem = timeTitular1[index];
-    if (removedItem.id !== null) {
+    if (removedItem.id !== null && removedItem.id !== undefined) {
       timeTitular1[index] = {
         id: null,
         jogador: "",
@@ -39,15 +48,14 @@ export default function Times() {
       };
       setJogadoresReservas((prevLista) => prevLista.concat(removedItem));
       setTimeTitular1([...timeTitular1]);
-
     } else {
-      Alert.alert("", "Posição vazia!");
+      setPosicaoVaziaVisible(true)
     }
   };
 
   const removerJogador2 = (index) => {
     const removedItem = timeTitular2[index];
-    if (removedItem.id !== null) {
+    if (removedItem.id !== null && removedItem.id !== undefined) {
       timeTitular2[index] = {
         id: null,
         jogador: "",
@@ -59,7 +67,7 @@ export default function Times() {
       setTimeTitular2([...timeTitular2]);
 
     } else {
-      Alert.alert("", "Posição vazia");
+      setPosicaoVaziaVisible(true)
     }
   };
 
@@ -72,7 +80,7 @@ export default function Times() {
         setJogadoresReservas((prevReservas) => prevReservas.slice(1));
         setTimeTitular1([...timeTitular1]);
       } else {
-        Alert.alert("", "Não há mais jogadores na reserva!");
+        setReservaVaziaVisible(true);
       }
     } else Alert.alert("", "Jogador precisa sair antes!");
   };
@@ -86,7 +94,7 @@ export default function Times() {
         setJogadoresReservas((prevReservas) => prevReservas.slice(1));
         setTimeTitular2([...timeTitular2]);
       } else {
-        Alert.alert("", "Não há mais jogadores na reserva!");
+        setReservaVaziaVisible(true);
       }
     } else Alert.alert("", "Jogador precisa sair antes!");
   };
@@ -104,7 +112,7 @@ export default function Times() {
         Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
     } else {
-      Alert.alert("", "Posição vazia!");
+      setPosicaoVaziaVisible(true)
     }
   };
 
@@ -121,7 +129,7 @@ export default function Times() {
         Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
     } else {
-      Alert.alert("", "Posição vazia!");
+      setPosicaoVaziaVisible(true)
     }
   };
 
@@ -138,7 +146,7 @@ export default function Times() {
         Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
     } else {
-      Alert.alert("", "Posição vazia!");
+      setPosicaoVaziaVisible(true)
     }
   };
 
@@ -155,7 +163,7 @@ export default function Times() {
         Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
     } else {
-      Alert.alert("", "Posição vazia!");
+      setPosicaoVaziaVisible(true)
     }
   };
 
@@ -215,10 +223,9 @@ export default function Times() {
 
   return (
     <View style={{ marginTop: 0 }}>
-      <Text style={[styles.timeText, { color: "#000" }]}>Escalação</Text>
       <View style={styles.container}>
         <View style={styles.timeContainer}>
-          <Text style={styles.timeText}>Time 01</Text>
+
           <FlatList
             data={timeTitular1}
             renderItem={renderItem1}
@@ -228,7 +235,7 @@ export default function Times() {
           />
         </View>
         <View style={styles.timeContainer}>
-          <Text style={styles.timeText}>Time 02</Text>
+
           <FlatList
             data={timeTitular2}
             renderItem={renderItem2}
@@ -238,6 +245,33 @@ export default function Times() {
           />
         </View>
       </View>
+      <Modal
+        visible={bemVindoVisible}
+        animationType="fade"
+        transparent={true}
+      >
+        <ModalBemVindo
+          handleClose={() => setBemVindoVisible(false)}
+        />
+      </Modal>
+      <Modal
+        visible={posicaoVaziaVisible}
+        animationType="fade"
+        transparent={true}
+      >
+        <ModalPosicaoVazia
+          handleClose={() => setPosicaoVaziaVisible(false)}
+        />
+      </Modal>
+      <Modal
+        visible={reservaVaziaVisible}
+        animationType="fade"
+        transparent={true}
+      >
+        <ModalReservaVazia
+          handleClose={() => setReservaVaziaVisible(false)}
+        />
+      </Modal>
     </View>
   );
 
@@ -248,12 +282,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
   },
-  timeText: {
-    fontSize: 30,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#20473c",
-  },
+
   timeContainer: {
     alignSelf: "center",
     width: "50%",

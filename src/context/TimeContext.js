@@ -22,7 +22,6 @@ export const TimeProvider = ({ children }) => {
     Array.from({ length: 5 }, createEmptyPlayer)
   );
 
-  // Carregar dados do AsyncStorage na inicialização
   useEffect(() => {
     const loadData = async () => {
       try {
@@ -40,7 +39,6 @@ export const TimeProvider = ({ children }) => {
     loadData();
   }, []);
 
-  // Atualizar AsyncStorage quando os dados mudam
   useEffect(() => {
     const saveData = async () => {
       try {
@@ -69,7 +67,7 @@ export const TimeProvider = ({ children }) => {
 export const useTimeContext = () => {
   const context = useContext(TimeContext);
   if (!context) {
-    throw new Error("useTimeContext must be used within a TimeProvider");
+    throw new Error("useTimeContext deve ser usando dentro TimeProvider");
   }
   return context;
 };

@@ -10,7 +10,6 @@ import {
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import { FontAwesome, AntDesign, Entypo } from "react-native-vector-icons";
 
-import CountDown from "react-native-countdown-component";
 
 export default function Cronometro() {
   const [playing, setPlaying] = useState(false);
