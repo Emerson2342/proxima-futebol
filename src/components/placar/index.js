@@ -11,6 +11,7 @@ export default function Placar() {
     const [indexToEdit, setIndexToEdit] = useState(0)
     const [editarNomeVisible, setEditarNomeVisible] = useState(false);
 
+
     const golsTime1 = placar.find(time => time.id === 1)?.gols || 0;
     const golsTime2 = placar.find(time => time.id === 2)?.gols || 0;
 
@@ -31,13 +32,24 @@ export default function Placar() {
                     <Text style={[styles.text, { color: "#3f8d65" }]}>{nomeTime1}</Text>
                 </TouchableOpacity>
                 <View style={{ width: "25%" }}>
-                    <Text style={styles.text}>{golsTime1}</Text>
+                    <Text style={[styles.text, styles.textPlacar]}>{golsTime1}</Text>
                 </View>
             </View>
-            <Text style={styles.text}>X</Text>
+            <TouchableOpacity
+                style={{ height: 50, justifyContent: "flex-end" }}
+                onPress={() => setPlacar((prevPlacar) => {
+                    const novoPlacar = [...prevPlacar];
+                    novoPlacar[0] = { ...novoPlacar[0], gols: 0 }
+                    novoPlacar[1] = { ...novoPlacar[1], gols: 0 }
+                    return novoPlacar;
+                }
+                )}
+
+
+            ><Text style={styles.text}>x</Text></TouchableOpacity>
             <View style={styles.timeContainer}>
                 <View style={{ width: "25%" }}>
-                    <Text style={styles.text}>{golsTime2}</Text>
+                    <Text style={[styles.text, styles.textPlacar]}>{golsTime2}</Text>
                 </View>
                 <TouchableOpacity
                     onPress={() => {
@@ -65,19 +77,26 @@ export default function Placar() {
 
 const styles = StyleSheet.create({
     container: {
+        top: -15,
         flexDirection: "row",
         justifyContent: 'space-between',
-        margin: 5,
     },
     timeContainer: {
         flexDirection: 'row',
         width: "47%",
         overflow: "hidden",
+        alignItems: "center"
     },
     text: {
         fontSize: 30,
-        fontWeight: 'bold',
         textAlign: 'center',
+        color: "#20473c"
+
+    },
+    textPlacar: {
+        fontSize: 40,
+        fontWeight: 'bold',
+
     }
 })
 

@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { MotiView } from "moti";
 import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
+import { json } from "react-router-dom";
 
 export default function ListaProximas() {
   const { jogadoresReservas, setJogadoresReservas } =
@@ -74,7 +75,10 @@ export default function ListaProximas() {
 
   return (
     <View>
-      <Text style={styles.textTitle}> Banco de Reservas</Text>
+      <Text
+        onLongPress={() => alert(JSON.stringify(jogadoresReservas, null, 2))}
+
+        style={styles.textTitle}> Banco de Reservas</Text>
       <View style={{ top: -55 }}>
         <FlatList
           style={styles.scrollView}

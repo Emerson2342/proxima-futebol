@@ -19,6 +19,7 @@ import ModalReservaVazia from "../Modal/ModalReservaVazia";
 import { useJogadorContext } from "../../context/JogadoresContext";
 import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
 import { useTimeContext } from "../../context/TimeContext";
+import { usePlacarContext } from "../../context/PlacarContext"
 
 export default function Times() {
   const { timeTitular1, setTimeTitular1, timeTitular2, setTimeTitular2 } =
@@ -26,6 +27,7 @@ export default function Times() {
   const { jogadoresReservas, setJogadoresReservas } =
     useJogadoresReservasContext();
   const { listaDeJogadores, setListaDeJogadores } = useJogadorContext();
+  const { placar, setPlacar } = usePlacarContext();
 
   const [bemVindoVisible, setBemVindoVisible] = useState(false);
   const [posicaoVaziaVisible, setPosicaoVaziaVisible] = useState(false);
@@ -108,6 +110,13 @@ export default function Times() {
       if (jogadorNaLista) {
         jogadorNaLista.gols += 1;
         setListaDeJogadores([...listaDeJogadores]);
+
+        setPlacar((prevPlacar) => {
+          const novoPlacar = [...prevPlacar];
+          novoPlacar[0] = { ...novoPlacar[0], gols: novoPlacar[0].gols + 1 };
+          return novoPlacar;
+
+        })
       } else {
         Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
@@ -142,6 +151,12 @@ export default function Times() {
       if (jogadorNaLista) {
         jogadorNaLista.gols += 1;
         setListaDeJogadores([...listaDeJogadores]);
+
+        setPlacar((prevPlacar) => {
+          const novoPlacar = [...prevPlacar];
+          novoPlacar[1] = { ...novoPlacar[1], gols: novoPlacar[1].gols + 1 }
+          return novoPlacar
+        })
       } else {
         Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
@@ -169,12 +184,14 @@ export default function Times() {
 
   const renderItem1 = ({ item, index }) => (
     <View style={styles.jogadorContainer}>
-      <View style={styles.jogadorContent}>
+      <View style={{ paddingVertical: 10 }}>
         <View style={styles.textContainer}>
           <Text style={styles.text}>{item.jogador}</Text>
         </View>
         <View style={styles.icones}>
-          <TouchableOpacity onPress={() => gol1(index)}>
+          <TouchableOpacity
+            onPress={() => gol1(index)}
+          >
             <FontAwesome name="soccer-ball-o" size={25} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => assist1(index)}>
@@ -195,7 +212,7 @@ export default function Times() {
   );
   const renderItem2 = ({ item, index }) => (
     <View style={styles.jogadorContainer}>
-      <View style={styles.jogadorContent}>
+      <View style={{ paddingVertical: 10 }}>
         <View style={styles.textContainer}>
           <Text style={styles.text}>{item.jogador}</Text>
         </View>
@@ -279,21 +296,22 @@ export default function Times() {
 }
 const styles = StyleSheet.create({
   container: {
+    top: -20,
     flexDirection: "row",
     justifyContent: "space-around",
+    padding: 10
   },
 
   timeContainer: {
     alignSelf: "center",
-    width: "50%",
-    padding: 5,
+    width: "48%",
+
   },
   textContainer: {
     backgroundColor: "#fff",
-    borderWidth: 1,
     borderRadius: 5,
-    elevation: 9,
-    height: 45,
+    elevation: 5,
+    height: 40,
     padding: 3,
     borderColor: "#fff",
   },
