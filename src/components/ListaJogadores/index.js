@@ -48,12 +48,10 @@ export default function ListadeJogadores() {
     setListaDeJogadores(novaListaDeJogadores);
     setIdentificador((prevId) => prevId + 1);
     setModalAddVisible(false);
-    alert(JSON.stringify(novoJogadorAtualizado, null, 2));
     setNome('');
   };
 
   const handleConfirmar = (id, jogador) => {
-
     setIdParaEditar(id);
     setNomeParaEditar(jogador)
     Alert.alert(
@@ -161,7 +159,7 @@ export default function ListadeJogadores() {
   return (
     <View style={styles.container}>
       <Text
-        onPress={() => alert(JSON.stringify(listaDeJogadores, null, 2))}
+        onLongPress={() => alert(JSON.stringify(listaDeJogadores, null, 2))}
         style={styles.textTitle}
       >
         Jogadores

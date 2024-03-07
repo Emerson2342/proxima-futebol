@@ -5,21 +5,24 @@ import { JogadorProvider } from "./src/context/JogadoresContext";
 import { JogadoresReservasProvider } from "./src/context/JogadoresReservasContext";
 import { TimeProvider } from "./src/context/TimeContext";
 import { IdentificadorProvider } from "./src/context/IdentificadorContext";
+import { PlacarProvider } from "./src/context/PlacarContext";
 
 import "react-native-reanimated";
 
 export default function App() {
   return (
-    <JogadorProvider>
-      <JogadoresReservasProvider>
-        <TimeProvider>
-          <IdentificadorProvider>
-            <NavigationContainer>
-              <Routes />
-            </NavigationContainer>
-          </IdentificadorProvider>
-        </TimeProvider>
-      </JogadoresReservasProvider>
-    </JogadorProvider>
+    <NavigationContainer>
+      <JogadorProvider>
+        <JogadoresReservasProvider>
+          <TimeProvider>
+            <IdentificadorProvider>
+              <PlacarProvider>
+                <Routes />
+              </PlacarProvider>
+            </IdentificadorProvider>
+          </TimeProvider>
+        </JogadoresReservasProvider>
+      </JogadorProvider>
+    </NavigationContainer>
   );
 }
