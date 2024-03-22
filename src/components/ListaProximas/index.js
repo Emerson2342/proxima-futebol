@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
   container: {
     // paddingLeft: 20,
     //paddingRight: 20,
+    top: 40,
     textAlign: "center",
     alignItems: "center",
     width: "100%",

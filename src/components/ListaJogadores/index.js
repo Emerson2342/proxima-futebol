@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
     bottom: "auto",
   },
   buttonContainer: {
-    marginTop: 20,
+    marginTop: 60,
     // paddingLeft: 5,
     //paddingRight: 5,
     justifyContent: "center",

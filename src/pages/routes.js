@@ -1,59 +1,122 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Home from "./Home";
+import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons'
 import AdicionarProxima from "./AdicionarProxima";
-//import Artilheiros from "./Artilheiros";
-import CustomTabBar from "../components/customTabBar";
+import Home from './Home';
 import Rank from "./Rank";
 import ListaJogadores from "./ListaJogadores";
+import { View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
 export function Routes() {
   return (
-    <Tab.Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarHideOnKeyboard: true,
-        tabBarShowLabel: true,
-        tabBarActiveTintColor: "#121212",
-
-        tabBarStyle: {
-          borderTopWidth: 0,
-          backGroundColor: "#ffffff",
-        },
-      }}
-      tabBar={(props) => <CustomTabBar {...props} />}
+    <View
+      style={{ flex: 1, backgroundColor: '#f2f2f2' }}
     >
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarIcon: "whistle",
-        }}
-      />
+      <Tab.Navigator
 
-      <Tab.Screen
-        name="Adicionar Próxima"
-        component={AdicionarProxima}
-        options={{
-          tabBarIcon: "content-paste",
+        screenOptions={{
+          headerShown: false,
+          tabBarHideOnKeyboard: true,
+          tabBarShowLabel: false,
+
+          tabBarStyle: {
+            borderTopWidth: 1,
+            borderWidth: 1,
+            borderColor: "#20473c",
+            alignSelf: 'center',
+            width: "95%",
+            marginBottom: 15,
+            borderRadius: 5,
+            backgroundColor: "#3f8d65",
+          },
         }}
-      />
-      <Tab.Screen
-        name="Lista de Jogadores"
-        component={ListaJogadores}
-        options={{
-          tabBarIcon: "person-add",
-        }}
-      />
-      <Tab.Screen
-        name="Rank"
-        component={Rank}
-        options={{
-          tabBarIcon: "emoji-events",
-        }}
-      />
-    </Tab.Navigator>
+
+      >
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              if (focused) {
+                return <MaterialCommunityIcons
+                  name='whistle'
+                  size={30}
+                  color={'#20473c'}
+                />
+              }
+              return <MaterialCommunityIcons
+                name='whistle-outline'
+                size={30}
+                color={'#20473c'}
+              />
+            }
+          }}
+        />
+
+        <Tab.Screen
+          name="Adicionar Próxima"
+          component={AdicionarProxima}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              if (focused) {
+                return <MaterialCommunityIcons
+                  name='clipboard-edit'
+                  size={30}
+                  color={'#20473c'}
+                />
+              }
+              return <MaterialCommunityIcons
+                name='clipboard-edit-outline'
+                size={30}
+                color={'#20473c'}
+              />
+            }
+          }}
+        />
+        <Tab.Screen
+          name="Lista de Jogadores"
+          component={ListaJogadores}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              if (focused) {
+                return <MaterialCommunityIcons
+                  name='account-multiple-plus'
+                  size={40}
+                  color={'#20473c'}
+                />
+              }
+              return <MaterialCommunityIcons
+                name='account-multiple-plus-outline'
+                size={40}
+                color={'#20473c'}
+              />
+            }
+          }}
+        />
+        <Tab.Screen
+          name="Rank"
+          component={Rank}
+          options={{
+            tabBarIcon: ({ focused }) => {
+              if (focused) {
+                return <MaterialCommunityIcons
+                  name='medal'
+                  size={30}
+                  color={'#20473c'}
+                />
+              }
+              return <MaterialCommunityIcons
+                name='medal-outline'
+                size={30}
+                color={'#20473c'}
+              />
+            }
+
+          }}
+        />
+      </Tab.Navigator>
+    </View>
   );
 }
