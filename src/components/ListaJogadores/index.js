@@ -25,7 +25,7 @@ export default function ListadeJogadores() {
   const [modalAddVisible, setModalAddVisible] = useState(false);
   const [modalNomeVisible, setModalNomeVisible] = useState(false);
   const [idParaEditar, setIdParaEditar] = useState(null);
-  const [nomeParaEditar, setNomeParaEditar] = useState('')
+  const [nomeParaEditar, setNomeParaEditar] = useState("");
 
   const [nome, setNome] = useState("");
   const [novoNome, setNovoNome] = useState(null);
@@ -48,12 +48,12 @@ export default function ListadeJogadores() {
     setListaDeJogadores(novaListaDeJogadores);
     setIdentificador((prevId) => prevId + 1);
     setModalAddVisible(false);
-    setNome('');
+    setNome("");
   };
 
   const handleConfirmar = (id, jogador) => {
     setIdParaEditar(id);
-    setNomeParaEditar(jogador)
+    setNomeParaEditar(jogador);
     Alert.alert(
       "Jogador",
       `${jogador}`,
@@ -61,7 +61,6 @@ export default function ListadeJogadores() {
         { text: "Cancelar", style: "cancel" },
         { text: "Apagar Jogador", onPress: () => handleDelete(id) },
         { text: "Editar nome", onPress: () => setModalNomeVisible(true) },
-
       ],
       { cancelable: false }
     );
@@ -88,7 +87,7 @@ export default function ListadeJogadores() {
         jogador: novoNome,
       };
       setListaDeJogadores(novaLista);
-      setModalNomeVisible(false)
+      setModalNomeVisible(false);
     }
   };
   const handleSelect = (jogador) => {
@@ -124,11 +123,9 @@ export default function ListadeJogadores() {
     );
   };
 
-
   const listaOrdenada = [...listaDeJogadores]
     .filter((item) => item !== null && item !== undefined)
     .sort((a, b) => a.jogador.localeCompare(b.jogador));
-
 
   const renderItem = ({ item, index }) => (
     <MotiView
@@ -155,7 +152,6 @@ export default function ListadeJogadores() {
     </MotiView>
   );
 
-
   return (
     <View style={styles.container}>
       <Text
@@ -173,7 +169,6 @@ export default function ListadeJogadores() {
         numColumns={2}
         columnWrapperStyle={{ justifyContent: "space-between" }}
       />
-
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -199,7 +194,9 @@ export default function ListadeJogadores() {
         />
       </Modal>
       <Modal
-        visible={modalNomeVisible} transparent={true} animationType='slide'
+        visible={modalNomeVisible}
+        transparent={true}
+        animationType="slide"
       >
         <ModalEditarNome
           handleEdit={() => handleEdit(idParaEditar, novoNome, setNovoNome)}
@@ -208,10 +205,8 @@ export default function ListadeJogadores() {
           setNovoNome={setNovoNome}
           nomeAtual={nomeParaEditar}
         />
-
       </Modal>
     </View>
-
   );
 }
 const styles = StyleSheet.create({
@@ -221,14 +216,14 @@ const styles = StyleSheet.create({
     paddingLeft: 7,
     paddingRight: 7,
   },
-  textTitle: {
-    fontSize: 40,
+  /*   textTitle: {
+    // fontSize: 40,
     textAlign: "center",
     flexWrap: "nowrap",
     width: "100%",
     fontWeight: "bold",
-    color: "#fff",
-  },
+    color: "#cece",
+  }, */
   jogadorContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -278,7 +273,7 @@ const styles = StyleSheet.create({
     flexWrap: "nowrap",
     width: "100%",
     fontWeight: "bold",
-    color: "#fff",
+    color: "#cece",
   },
   jogadorContainer: {
     flexDirection: "row",
@@ -302,7 +297,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   jogadorText: {
-    color: "#000",
+    color: "#20473c",
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 17,
@@ -333,7 +328,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#20473c",
     borderRadius: 10,
     marginBottom: 10,
-    padding: 10,
+    padding: 5,
     width: "90%",
   },
 
@@ -343,14 +338,10 @@ const styles = StyleSheet.create({
   inputButtonText: {
     textAlign: "center",
     color: "#fff",
-    fontSize: 25,
-    fontWeight: "bold",
-    bottom: "auto",
+    fontSize: 20,
   },
   buttonContainer: {
-    marginTop: 20,
-    // paddingLeft: 5,
-    //paddingRight: 5,
+    marginTop: 70,
     justifyContent: "center",
     width: "100%",
   },

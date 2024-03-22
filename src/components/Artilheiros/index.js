@@ -17,7 +17,6 @@ export default function Artilheiros() {
       }
     });
 
-
   const renderItemGols = ({ item, index }) => {
     const ordem = index + 1;
     return (
@@ -48,7 +47,6 @@ export default function Artilheiros() {
 
   return (
     <View style={styles.container}>
-
       <Text style={styles.titulo}>Gols e Assistências</Text>
       <View style={styles.column}>
         <View style={styles.cabecalho}>
@@ -76,7 +74,6 @@ export default function Artilheiros() {
       </View>
     </View>
   );
-
 }
 const styles = StyleSheet.create({
   container: {
@@ -136,7 +133,7 @@ const styles = StyleSheet.create({
     top: -80,
     fontSize: 40,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#cece",
     textAlign: "center",
   },
   listIndex: {
@@ -149,5 +146,5 @@ const styles = StyleSheet.create({
     color: "#20473c",
     fontSize: 15,
     textAlign: "left",
-  }
+  },
 });

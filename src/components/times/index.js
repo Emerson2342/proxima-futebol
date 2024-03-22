@@ -294,6 +294,7 @@ const styles = StyleSheet.create({
   timeContainer: {
     alignSelf: "center",
     width: "48%",
+
   },
   textContainer: {
     backgroundColor: "#fff",
@@ -301,7 +302,8 @@ const styles = StyleSheet.create({
     elevation: 5,
     height: 40,
     padding: 3,
-    borderColor: "#fff",
+    borderColor: "#20473c",
+    borderWidth: 1
   },
   text: {
     fontSize: 20,

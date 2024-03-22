@@ -77,8 +77,11 @@ export default function ListaProximas() {
     <View>
       <Text
         onLongPress={() => alert(JSON.stringify(jogadoresReservas, null, 2))}
-
-        style={styles.textTitle}> Banco de Reservas</Text>
+        style={styles.textTitle}
+      >
+        {" "}
+        Banco de Reservas
+      </Text>
       <View style={{ top: -55 }}>
         <FlatList
           style={styles.scrollView}
@@ -123,10 +126,10 @@ const styles = StyleSheet.create({
     flexWrap: "nowrap",
     width: "100%",
     fontWeight: "bold",
-    color: "#fff",
+    color: "#cece",
   },
   jogadorText: {
-    color: "#000",
+    color: "#20473c",
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 17,
@@ -144,11 +147,11 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     alignSelf: "center",
-    top: 15,
+    top: 45,
     backgroundColor: "#20473c",
     borderRadius: 10,
     marginBottom: 10,
-    padding: 10,
+    padding: 5,
     width: "90%",
   },
   inputButton: {
@@ -156,13 +159,10 @@ const styles = StyleSheet.create({
   },
   inputButtonText: {
     color: "#fff",
-    fontSize: 25,
-    fontWeight: "bold",
-    bottom: "auto",
+    fontSize: 20,
   },
   container: {
-    // paddingLeft: 20,
-    //paddingRight: 20,
+    top: 20,
     textAlign: "center",
     alignItems: "center",
     width: "100%",
