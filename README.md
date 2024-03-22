@@ -1,3 +1,8 @@
+![Página Principal](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/Home.jpg)
+![Reservas](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/Reservas.jpg)
+![Lista de Jogadores](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/Jogadores.jpg)
+![Artilharia](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/Artilharia.jpg)
+![Adicionar Jogador](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/AdicionarJogador.jpg)
 
 #Informações
 
@@ -34,8 +39,4 @@ Para adicionar gol, basta acionar o botão da bola e para adicionar assistência
 Para zerar o placar, basta um clice no X no placar que será zerado.
 Mesmo com o aplicativo minimizado, o cronômetro conitnuará rodando, exceto se sair da aplicação que ele será zerado.
 
-![Página Principal](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/Home.jpg)
-![Reservas](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/Reservas.jpg)
-![Lista de Jogadores](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/Jogadores.jpg)
-![Artilharia](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/Artilharia.jpg)
-![Adicionar Jogador](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/AdicionarJogador.jpg)
+
