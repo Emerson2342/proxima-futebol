@@ -7,7 +7,7 @@ import {
   Image,
   FlatList,
   Alert,
-  Modal
+  Modal,
 } from "react-native";
 import { FontAwesome, Entypo, AntDesign } from "@expo/vector-icons";
 import { MotiView, MotiText } from "moti";
@@ -19,7 +19,7 @@ import ModalReservaVazia from "../Modal/ModalReservaVazia";
 import { useJogadorContext } from "../../context/JogadoresContext";
 import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
 import { useTimeContext } from "../../context/TimeContext";
-import { usePlacarContext } from "../../context/PlacarContext"
+import { usePlacarContext } from "../../context/PlacarContext";
 
 export default function Times() {
   const { timeTitular1, setTimeTitular1, timeTitular2, setTimeTitular2 } =
@@ -32,7 +32,6 @@ export default function Times() {
   const [bemVindoVisible, setBemVindoVisible] = useState(false);
   const [posicaoVaziaVisible, setPosicaoVaziaVisible] = useState(false);
   const [reservaVaziaVisible, setReservaVaziaVisible] = useState(false);
-
 
   useEffect(() => {
     setBemVindoVisible(true);
@@ -51,7 +50,7 @@ export default function Times() {
       setJogadoresReservas((prevLista) => prevLista.concat(removedItem));
       setTimeTitular1([...timeTitular1]);
     } else {
-      setPosicaoVaziaVisible(true)
+      setPosicaoVaziaVisible(true);
     }
   };
 
@@ -67,9 +66,8 @@ export default function Times() {
       };
       setJogadoresReservas((prevLista) => prevLista.concat(removedItem));
       setTimeTitular2([...timeTitular2]);
-
     } else {
-      setPosicaoVaziaVisible(true)
+      setPosicaoVaziaVisible(true);
     }
   };
 
@@ -115,13 +113,12 @@ export default function Times() {
           const novoPlacar = [...prevPlacar];
           novoPlacar[0] = { ...novoPlacar[0], gols: novoPlacar[0].gols + 1 };
           return novoPlacar;
-
-        })
+        });
       } else {
         Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
     } else {
-      setPosicaoVaziaVisible(true)
+      setPosicaoVaziaVisible(true);
     }
   };
 
@@ -138,7 +135,7 @@ export default function Times() {
         Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
     } else {
-      setPosicaoVaziaVisible(true)
+      setPosicaoVaziaVisible(true);
     }
   };
 
@@ -154,14 +151,14 @@ export default function Times() {
 
         setPlacar((prevPlacar) => {
           const novoPlacar = [...prevPlacar];
-          novoPlacar[1] = { ...novoPlacar[1], gols: novoPlacar[1].gols + 1 }
-          return novoPlacar
-        })
+          novoPlacar[1] = { ...novoPlacar[1], gols: novoPlacar[1].gols + 1 };
+          return novoPlacar;
+        });
       } else {
         Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
     } else {
-      setPosicaoVaziaVisible(true)
+      setPosicaoVaziaVisible(true);
     }
   };
 
@@ -178,44 +175,51 @@ export default function Times() {
         Alert.alert("Jogador não encontrado na Lista de Jogadores!");
       }
     } else {
-      setPosicaoVaziaVisible(true)
+      setPosicaoVaziaVisible(true);
     }
   };
 
   const renderItem1 = ({ item, index }) => (
-    <View style={styles.jogadorContainer}>
-      <View style={{ paddingVertical: 10 }}>
+    <View style={{ paddingVertical: 10 }}>
+      <MotiView
+        from={{ rotateX: "-100deg", opacity: 0 }}
+        animate={{ rotateX: "0deg", opacity: 1 }}
+      >
         <View style={styles.textContainer}>
           <Text style={styles.text}>{item.jogador}</Text>
         </View>
-        <View style={styles.icones}>
-          <TouchableOpacity
-            onPress={() => gol1(index)}
-          >
-            <FontAwesome name="soccer-ball-o" size={25} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => assist1(index)}>
-            <Image
-              style={{ objectFit: "contain", height: 30 }}
-              source={require("../../../assets/assist.png")}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => adicionarJogador1(index)}>
-            <Entypo name="arrow-up" color={"green"} size={30} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => removerJogador1(index)}>
-            <Entypo name="arrow-down" color={"red"} size={30} />
-          </TouchableOpacity>
-        </View>
+      </MotiView>
+
+      <View style={styles.icones}>
+        <TouchableOpacity onPress={() => gol1(index)}>
+          <FontAwesome name="soccer-ball-o" size={25} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => assist1(index)}>
+          <Image
+            style={{ objectFit: "contain", height: 30 }}
+            source={require("../../../assets/assist.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => adicionarJogador1(index)}>
+          <Entypo name="arrow-up" color={"green"} size={30} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => removerJogador1(index)}>
+          <Entypo name="arrow-down" color={"red"} size={30} />
+        </TouchableOpacity>
       </View>
     </View>
   );
   const renderItem2 = ({ item, index }) => (
     <View style={styles.jogadorContainer}>
       <View style={{ paddingVertical: 10 }}>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>{item.jogador}</Text>
-        </View>
+        <MotiView
+          from={{ rotateX: "-100deg", opacity: 0 }}
+          animate={{ rotateX: "0deg", opacity: 1 }}
+        >
+          <View style={styles.textContainer}>
+            <Text style={styles.text}>{item.jogador}</Text>
+          </View>
+        </MotiView>
         <View style={styles.icones}>
           <TouchableOpacity onPress={() => gol2(index)}>
             <FontAwesome name="soccer-ball-o" size={25} />
@@ -237,12 +241,10 @@ export default function Times() {
     </View>
   );
 
-
   return (
     <View style={{ marginTop: 0 }}>
       <View style={styles.container}>
         <View style={styles.timeContainer}>
-
           <FlatList
             data={timeTitular1}
             renderItem={renderItem1}
@@ -252,7 +254,6 @@ export default function Times() {
           />
         </View>
         <View style={styles.timeContainer}>
-
           <FlatList
             data={timeTitular2}
             renderItem={renderItem2}
@@ -262,50 +263,37 @@ export default function Times() {
           />
         </View>
       </View>
-      <Modal
-        visible={bemVindoVisible}
-        animationType="fade"
-        transparent={true}
-      >
-        <ModalBemVindo
-          handleClose={() => setBemVindoVisible(false)}
-        />
+      <Modal visible={bemVindoVisible} animationType="fade" transparent={true}>
+        <ModalBemVindo handleClose={() => setBemVindoVisible(false)} />
       </Modal>
       <Modal
         visible={posicaoVaziaVisible}
         animationType="fade"
         transparent={true}
       >
-        <ModalPosicaoVazia
-          handleClose={() => setPosicaoVaziaVisible(false)}
-        />
+        <ModalPosicaoVazia handleClose={() => setPosicaoVaziaVisible(false)} />
       </Modal>
       <Modal
         visible={reservaVaziaVisible}
         animationType="fade"
         transparent={true}
       >
-        <ModalReservaVazia
-          handleClose={() => setReservaVaziaVisible(false)}
-        />
+        <ModalReservaVazia handleClose={() => setReservaVaziaVisible(false)} />
       </Modal>
     </View>
   );
-
-
 }
 const styles = StyleSheet.create({
   container: {
     top: -20,
     flexDirection: "row",
     justifyContent: "space-around",
-    padding: 10
+    padding: 10,
   },
 
   timeContainer: {
     alignSelf: "center",
     width: "48%",
-
   },
   textContainer: {
     backgroundColor: "#fff",
@@ -320,6 +308,7 @@ const styles = StyleSheet.create({
     padding: 3,
     color: "#20473c",
     fontWeight: "bold",
+    textAlign: "center",
   },
   icones: {
     flexDirection: "row",
