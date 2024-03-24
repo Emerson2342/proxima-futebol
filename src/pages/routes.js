@@ -5,7 +5,7 @@ import AdicionarProxima from "./AdicionarProxima";
 import Home from "./Home";
 import Rank from "./Rank";
 import ListaJogadores from "./ListaJogadores";
-import { View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
@@ -16,19 +16,13 @@ export function Routes() {
         screenOptions={{
           headerShown: false,
           tabBarHideOnKeyboard: true,
-          tabBarLabelStyle: {
-            color: "#cece",
-          },
-
+          tabBarShowLabel: false,
           tabBarStyle: {
-            borderTopWidth: 1,
-            borderWidth: 1,
-            borderColor: "#20473c",
+            elevation: 0,
+            borderTopWidth: 0,
             alignSelf: "center",
             width: "95%",
-            marginBottom: 15,
-            borderRadius: 5,
-            backgroundColor: "#3f8d65",
+            backgroundColor: "#f2f2f2",
           },
         }}
       >
@@ -43,6 +37,7 @@ export function Routes() {
                     name="whistle"
                     size={30}
                     color={"#20473c"}
+                    style={styles.icon}
                   />
                 );
               }
@@ -68,6 +63,7 @@ export function Routes() {
                     name="clipboard-edit"
                     size={30}
                     color={"#20473c"}
+                    style={styles.icon}
                   />
                 );
               }
@@ -90,15 +86,16 @@ export function Routes() {
                 return (
                   <MaterialCommunityIcons
                     name="account-multiple-plus"
-                    size={40}
+                    size={35}
                     color={"#20473c"}
+                    style={styles.icon}
                   />
                 );
               }
               return (
                 <MaterialCommunityIcons
                   name="account-multiple-plus-outline"
-                  size={40}
+                  size={35}
                   color={"#20473c"}
                 />
               );
@@ -116,6 +113,7 @@ export function Routes() {
                     name="medal"
                     size={30}
                     color={"#20473c"}
+                    style={styles.icon}
                   />
                 );
               }
@@ -133,3 +131,13 @@ export function Routes() {
     </View>
   );
 }
+const styles = StyleSheet.create({
+  icon: {
+    backgroundColor: "#cece",
+    borderWidth: 1,
+    width: "70%",
+    alignSelf: "center",
+    borderRadius: 5,
+    textAlign: "center",
+  },
+});

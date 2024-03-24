@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     width: "30%",
   },
   titulo: {
-    top: -80,
+    top: -65,
     fontSize: 40,
     fontWeight: "bold",
     color: "#cece",

@@ -115,12 +115,13 @@ export default function ListaProximas() {
 }
 const styles = StyleSheet.create({
   scrollView: {
+    marginTop: 20,
     height: 450,
     paddingLeft: 7,
     paddingRight: 7,
   },
   textTitle: {
-    top: -85,
+    top: -65,
     fontSize: 40,
     textAlign: "center",
     flexWrap: "nowrap",
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     alignSelf: "center",
-    top: 45,
+    top: 85,
     backgroundColor: "#20473c",
     borderRadius: 10,
     marginBottom: 10,
@@ -160,11 +161,5 @@ const styles = StyleSheet.create({
   inputButtonText: {
     color: "#fff",
     fontSize: 20,
-  },
-  container: {
-    top: 20,
-    textAlign: "center",
-    alignItems: "center",
-    width: "100%",
   },
 });

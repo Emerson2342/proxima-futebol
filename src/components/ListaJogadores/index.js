@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    top: -85,
+    top: -65,
   },
   inputButtonText: {
     textAlign: "center",
@@ -341,7 +341,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   buttonContainer: {
-    marginTop: 70,
+    marginTop: 90,
     justifyContent: "center",
     width: "100%",
   },

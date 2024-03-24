@@ -1,15 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Button,
-  Alert,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import { FontAwesome, AntDesign, Entypo } from "react-native-vector-icons";
-
 
 export default function Cronometro() {
   const [playing, setPlaying] = useState(false);
@@ -24,7 +16,6 @@ export default function Cronometro() {
   const handleIncrement = () => {
     setKey((prevKey) => prevKey + 1);
     setTime((asdf) => asdf + 30);
-
     setPlaying(false);
   };
   const handleDecrement = () => {
@@ -46,7 +37,7 @@ export default function Cronometro() {
           <TouchableOpacity onPress={() => play()}>
             <AntDesign
               name={playing ? "pause" : "caretright"}
-              size={40}
+              size={30}
               color={"#cece"}
             />
           </TouchableOpacity>
@@ -65,7 +56,7 @@ export default function Cronometro() {
             Alert.alert("", "Fim de jogo");
             handleReset();
           }}
-          strokeWidth={8}
+          strokeWidth={0}
           trailColor={"#cece"}
         >
           {({ remainingTime }) => (
@@ -78,10 +69,10 @@ export default function Cronometro() {
         </CountdownCircleTimer>
         <View style={styles.buttonContent}>
           <TouchableOpacity onPress={() => handleIncrement()}>
-            <FontAwesome name={"plus"} size={30} color={"#cece"} />
+            <FontAwesome name={"plus"} size={20} color={"#cece"} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleDecrement()}>
-            <FontAwesome name={"minus"} size={30} color={"#cece"} />
+            <FontAwesome name={"minus"} size={20} color={"#cece"} />
           </TouchableOpacity>
         </View>
       </View>
@@ -90,25 +81,23 @@ export default function Cronometro() {
 }
 const styles = StyleSheet.create({
   container: {
-    top: -20,
     justifyContent: "space-between",
     alignSelf: "center",
     flexDirection: "row",
   },
   tempoText: {
     color: "#cece",
-    fontSize: 30,
+    fontSize: 35,
     fontWeight: "bold",
   },
   button: {
-    width: "70%",
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: "center",
   },
   buttonContent: {
-    width: "20%",
-    height: 80,
+    width: "30%",
+    flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
   },
