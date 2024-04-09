@@ -12,7 +12,6 @@ import {
 import { FontAwesome, Entypo, AntDesign } from "@expo/vector-icons";
 import { MotiView, MotiText } from "moti";
 
-import ModalBemVindo from "../Modal/ModalBemVindo";
 import ModalPosicaoVazia from "../Modal/ModalPosicaoVazia";
 import ModalReservaVazia from "../Modal/ModalReservaVazia";
 
@@ -29,12 +28,17 @@ export default function Times() {
   const { listaDeJogadores, setListaDeJogadores } = useJogadorContext();
   const { placar, setPlacar } = usePlacarContext();
 
-  const [bemVindoVisible, setBemVindoVisible] = useState(false);
   const [posicaoVaziaVisible, setPosicaoVaziaVisible] = useState(false);
   const [reservaVaziaVisible, setReservaVaziaVisible] = useState(false);
 
+  const [initialRender, setInitialRender] = useState(true);
+
   useEffect(() => {
-    setBemVindoVisible(true);
+    const timer = setTimeout(() => {
+      setInitialRender(false);
+    }, 3000);
+
+    return () => clearTimeout(timer); // Limpa o timer em caso de desmontagem do componente
   }, []);
 
   const removerJogador1 = (index) => {
@@ -179,66 +183,74 @@ export default function Times() {
     }
   };
 
-  const renderItem1 = ({ item, index }) => (
-    <View style={{ paddingVertical: 10 }}>
+  const renderItem1 = ({ item, index }) => {
+    return (
       <MotiView
-        from={{ rotateX: "-100deg", opacity: 0 }}
-        animate={{ rotateX: "0deg", opacity: 1 }}
+        style={{ paddingVertical: 10 }}
+        from={initialRender ? { translateX: -150, opacity: 0 } : undefined}
+        animate={initialRender ? { translateX: 0, opacity: 1 } : undefined}
+        transition={{ type: "timing", duration: 1000 + index * 500 }}
       >
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>{item.jogador}</Text>
-        </View>
-      </MotiView>
-
-      <View style={styles.icones}>
-        <TouchableOpacity onPress={() => gol1(index)}>
-          <FontAwesome name="soccer-ball-o" size={25} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => assist1(index)}>
-          <Image
-            style={{ objectFit: "contain", height: 30 }}
-            source={require("../../../assets/assist.png")}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => adicionarJogador1(index)}>
-          <Entypo name="arrow-up" color={"green"} size={30} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => removerJogador1(index)}>
-          <Entypo name="arrow-down" color={"red"} size={30} />
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
-  const renderItem2 = ({ item, index }) => (
-    <View style={styles.jogadorContainer}>
-      <View style={{ paddingVertical: 10 }}>
         <MotiView
-          from={{ rotateX: "-100deg", opacity: 0 }}
-          animate={{ rotateX: "0deg", opacity: 1 }}
+          style={styles.textContainer}
+          from={{ translateX: -150, opacity: 0 }}
+          animate={{ translateX: 0, opacity: 1 }}
         >
-          <View style={styles.textContainer}>
-            <Text style={styles.text}>{item.jogador}</Text>
-          </View>
+          <Text style={styles.text}>{item.jogador}</Text>
         </MotiView>
+
         <View style={styles.icones}>
-          <TouchableOpacity onPress={() => gol2(index)}>
+          <TouchableOpacity onPress={() => gol1(index)}>
             <FontAwesome name="soccer-ball-o" size={25} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => assist2(index)}>
+          <TouchableOpacity onPress={() => assist1(index)}>
             <Image
               style={{ objectFit: "contain", height: 30 }}
               source={require("../../../assets/assist.png")}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => adicionarJogador2(index)}>
+          <TouchableOpacity onPress={() => adicionarJogador1(index)}>
             <Entypo name="arrow-up" color={"green"} size={30} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => removerJogador2(index)}>
+          <TouchableOpacity onPress={() => removerJogador1(index)}>
             <Entypo name="arrow-down" color={"red"} size={30} />
           </TouchableOpacity>
         </View>
+      </MotiView>
+    );
+  };
+  const renderItem2 = ({ item, index }) => (
+    <MotiView
+      style={{ paddingVertical: 10 }}
+      from={initialRender ? { translateX: 150, opacity: 0 } : undefined}
+      animate={initialRender ? { translateX: 0, opacity: 1 } : undefined}
+      transition={{ type: "timing", duration: 1000 + index * 500 }}
+    >
+      <MotiView
+        style={styles.textContainer}
+        from={{ translateX: 150, opacity: 0 }}
+        animate={{ translateX: 0, opacity: 1 }}
+      >
+        <Text style={styles.text}>{item.jogador}</Text>
+      </MotiView>
+      <View style={styles.icones}>
+        <TouchableOpacity onPress={() => gol2(index)}>
+          <FontAwesome name="soccer-ball-o" size={25} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => assist2(index)}>
+          <Image
+            style={{ objectFit: "contain", height: 30 }}
+            source={require("../../../assets/assist.png")}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => adicionarJogador2(index)}>
+          <Entypo name="arrow-up" color={"green"} size={30} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => removerJogador2(index)}>
+          <Entypo name="arrow-down" color={"red"} size={30} />
+        </TouchableOpacity>
       </View>
-    </View>
+    </MotiView>
   );
 
   return (
@@ -263,9 +275,6 @@ export default function Times() {
           />
         </View>
       </View>
-      <Modal visible={bemVindoVisible} animationType="fade" transparent={true}>
-        <ModalBemVindo handleClose={() => setBemVindoVisible(false)} />
-      </Modal>
       <Modal
         visible={posicaoVaziaVisible}
         animationType="fade"
@@ -294,16 +303,15 @@ const styles = StyleSheet.create({
   timeContainer: {
     alignSelf: "center",
     width: "48%",
-
   },
   textContainer: {
     backgroundColor: "#fff",
     borderRadius: 5,
-    elevation: 5,
+    // elevation: 5,
     height: 40,
     padding: 3,
     borderColor: "#20473c",
-    borderWidth: 1
+    borderWidth: 1,
   },
   text: {
     fontSize: 20,
