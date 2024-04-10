@@ -15,12 +15,12 @@ export default function Cronometro() {
   };
   const handleIncrement = () => {
     setKey((prevKey) => prevKey + 1);
-    setTime((asdf) => asdf + 60);
+    setTime((asdf) => asdf + 30);
     setPlaying(false);
   };
   const handleDecrement = () => {
     setKey((prevKey) => prevKey + 1);
-    setTime((prevTime) => Math.max(0, prevTime - 60));
+    setTime((prevTime) => Math.max(0, prevTime - 30));
     setPlaying(false);
   };
 
@@ -45,9 +45,7 @@ export default function Cronometro() {
             <Entypo name={"cw"} size={25} color={"#20473c"} />
           </TouchableOpacity>
         </View>
-        <View
-          style={{ top: -35 }}
-        >
+        <View style={{ top: -35 }}>
           <CountdownCircleTimer
             key={key}
             size={120}
@@ -88,15 +86,15 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignSelf: "center",
     flexDirection: "row",
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     marginLeft: 30,
     marginRight: 30,
     height: 50,
-    top: 90,
-    width: '90%',
-    alignSelf: 'center',
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    top: 60,
+    width: "90%",
+    alignSelf: "center",
+    borderBottomEndRadius: 10,
+    borderBottomLeftRadius: 10,
   },
   tempoText: {
     color: "#20473c",

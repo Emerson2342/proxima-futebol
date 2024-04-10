@@ -77,10 +77,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: '#fff',
-    top: 90,
-    width: '90%',
-    alignSelf: 'center',
+    top: 60,
+    width: "90%",
+    alignSelf: "center",
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     marginBottom: 15,
@@ -94,12 +93,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 30,
     textAlign: "center",
-    fontWeight: 'bold',
-    color: '#20473c'
+    fontWeight: "bold",
+    color: "#20473c",
   },
   textPlacar: {
     fontSize: 40,
     fontWeight: "bold",
-    color: '#20473c'
+    color: "#20473c",
   },
 });

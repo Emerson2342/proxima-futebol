@@ -294,7 +294,7 @@ export default function Times() {
 }
 const styles = StyleSheet.create({
   container: {
-    top: 80,
+    top: 50,
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10,

@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { MotiView } from "moti";
+import * as Animatable from "react-native-animatable";
 import { ModalAddProxima } from "../Modal/ModalAddProxima";
 import { ModalEditarNome } from "../Modal/ModalEditarNome";
 import { useJogadorContext } from "../../context/JogadoresContext";
@@ -128,14 +128,11 @@ export default function ListadeJogadores() {
     .sort((a, b) => a.jogador.localeCompare(b.jogador));
 
   const renderItem = ({ item, index }) => (
-    <MotiView
-      from={{ rotateX: "-100deg", opacity: 0 }}
-      animate={{ rotateX: "0deg", opacity: 1 }}
-    >
+    <Animatable.View animation="flipInX" duration={1500}>
       <TouchableOpacity
         style={
           item.selected
-            ? [styles.jogadorContainer, { backgroundColor: '#ffa200' }]
+            ? [styles.jogadorContainer, { backgroundColor: "#ffa200" }]
             : styles.jogadorContainer
         }
         onPress={() => handleSelect(item)}
@@ -143,24 +140,25 @@ export default function ListadeJogadores() {
       >
         <Text
           style={
-            item.selected ? [styles.jogadorText, { color: '#000' }] : styles.jogadorText
+            item.selected
+              ? [styles.jogadorText, { color: "#000" }]
+              : styles.jogadorText
           }
         >
           {item.jogador}
         </Text>
       </TouchableOpacity>
-    </MotiView>
+    </Animatable.View>
   );
 
   return (
     <View style={styles.container}>
-      <View
-        style={styles.titleContainer}
-      >
+      <View style={styles.titleContainer}>
         <Text
           onLongPress={() => alert(JSON.stringify(listaDeJogadores, null, 2))}
           style={styles.textTitle}
-        >Jogadores
+        >
+          Jogadores
         </Text>
       </View>
 
@@ -209,20 +207,20 @@ export default function ListadeJogadores() {
           nomeAtual={nomeParaEditar}
         />
       </Modal>
-    </View >
+    </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    top: 110,
+    top: 60,
   },
   titleContainer: {
-    backgroundColor: '#fff',
-    width: '90%',
-    alignSelf: 'center',
+    backgroundColor: "#fff",
+    width: "90%",
+    alignSelf: "center",
     height: 70,
-    justifyContent: 'center',
-    borderRadius: 9
+    justifyContent: "center",
+    borderRadius: 9,
   },
   scrollView: {
     marginTop: 20,
@@ -275,13 +273,13 @@ const styles = StyleSheet.create({
     width: "90%",
   },
   textButton: {
-    color: "#000",
+    color: "#20473c",
     fontSize: 20,
     textAlign: "center",
-    fontWeight: 'bold'
+    fontWeight: "bold",
   },
   buttonContainer: {
     width: "100%",
-    marginTop: 20,
+    marginTop: 50,
   },
 });

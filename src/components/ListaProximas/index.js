@@ -6,7 +6,7 @@ import {
   Alert,
   FlatList,
 } from "react-native";
-import { MotiView } from "moti";
+import * as Animatable from "react-native-animatable";
 import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
 
 export default function ListaProximas() {
@@ -50,16 +50,7 @@ export default function ListaProximas() {
   };
 
   const renderItem = ({ item, index }) => (
-    <MotiView
-      from={{
-        rotateX: "-100deg",
-        opacity: 0,
-      }}
-      animate={{
-        rotateX: "0deg",
-        opacity: 1,
-      }}
-    >
+    <Animatable.View animation="flipInX" duration={1500}>
       <TouchableOpacity
         onLongPress={() => handleConfirmar(item.jogador, index)}
       >
@@ -67,24 +58,22 @@ export default function ListaProximas() {
           <Text style={styles.jogadorText}>{item.jogador}</Text>
         </View>
       </TouchableOpacity>
-    </MotiView>
+    </Animatable.View>
   );
 
   return (
-    <View
-      style={{ top: 110 }}
-    >
-      <View
-        style={styles.titleContainer}
-      ><Text
-        onLongPress={() => alert(JSON.stringify(jogadoresReservas, null, 2))}
-        style={styles.textTitle}
-      >
+    <View style={{ top: 60 }}>
+      <View style={styles.titleContainer}>
+        <Text
+          onLongPress={() => alert(JSON.stringify(jogadoresReservas, null, 2))}
+          style={styles.textTitle}
+        >
           {" "}
           Banco de Reservas
-        </Text></View>
+        </Text>
+      </View>
 
-      <View >
+      <View>
         <FlatList
           style={styles.scrollView}
           data={jogadoresReservas}
@@ -101,7 +90,6 @@ export default function ListaProximas() {
           >
             <Text style={styles.inputButtonText}>Segure Para Misturar</Text>
           </TouchableOpacity>
-
 
           <TouchableOpacity
             style={styles.button}
@@ -122,12 +110,12 @@ const styles = StyleSheet.create({
     paddingRight: 7,
   },
   titleContainer: {
-    backgroundColor: '#fff',
-    width: '90%',
-    alignSelf: 'center',
+    backgroundColor: "#fff",
+    width: "90%",
+    alignSelf: "center",
     height: 70,
-    justifyContent: 'center',
-    borderRadius: 9
+    justifyContent: "center",
+    borderRadius: 9,
   },
   textTitle: {
     fontSize: 30,
@@ -155,10 +143,10 @@ const styles = StyleSheet.create({
   },
 
   inputButtonText: {
-    color: "#000",
+    color: "#20473c",
     fontSize: 20,
-    textAlign: 'center',
-    fontWeight: 'bold'
+    textAlign: "center",
+    fontWeight: "bold",
   },
   button: {
     alignSelf: "center",
@@ -170,6 +158,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
-    marginTop: 20,
+    marginTop: 50,
   },
 });
