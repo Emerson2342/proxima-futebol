@@ -26,11 +26,11 @@ export function ModalAddProxima({ handleClose, handleSalvar, nome, setNome }) {
             <Text style={styles.buttonText}>Voltar</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.button, { backgroundColor: "#20473c" }]}
+            style={[styles.button, { backgroundColor: "#489404" }]}
             onPress={() => handleSalvar()}
           >
             <Text style={[styles.buttonText, { color: "#fff" }]}>
-              Salvar Próxima
+              Salvar Jogador
             </Text>
           </TouchableOpacity>
         </View>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     paddingBottom: 15,
-    color: "#20473c"
+    color: "#489404"
   },
 
   input: {
@@ -68,8 +68,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     padding: 10,
     borderRadius: 7,
-    borderColor: "#20473c",
-    textAlign: "center"
+    borderColor: "#489404",
+    textAlign: "center",
+
   },
   buttonArea: {
     flexDirection: "row",
@@ -85,10 +86,10 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 7,
     borderWidth: 2,
-    borderColor: "#20473c",
+    borderColor: "#489404",
   },
   buttonText: {
-    color: "#20473c",
+    color: "#489404",
     fontSize: 15,
     fontWeight: "bold",
   },

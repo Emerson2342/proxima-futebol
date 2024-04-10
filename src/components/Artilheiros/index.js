@@ -47,7 +47,11 @@ export default function Artilheiros() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>Gols e Assistências</Text>
+      <View
+        style={styles.titleContainer}
+      >
+        <Text style={styles.titulo}>Gols e Assistências</Text>
+      </View>
       <View style={styles.column}>
         <View style={styles.cabecalho}>
           <View style={styles.jogador}>
@@ -77,7 +81,15 @@ export default function Artilheiros() {
 }
 const styles = StyleSheet.create({
   container: {
-    index: 1,
+    top: 110,
+  },
+  titleContainer: {
+    backgroundColor: '#fff',
+    width: '90%',
+    alignSelf: 'center',
+    height: 70,
+    justifyContent: 'center',
+    borderRadius: 9
   },
   cabecalho: {
     marginRight: 10,
@@ -102,7 +114,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   column: {
-    top: -35,
     maxHeight: 450,
     alignItems: "center",
     marginBottom: 25,
@@ -130,10 +141,9 @@ const styles = StyleSheet.create({
     width: "30%",
   },
   titulo: {
-    top: -65,
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: "bold",
-    color: "#cece",
+    color: "#20473c",
     textAlign: "center",
   },
   listIndex: {

@@ -1,4 +1,4 @@
-import { StyleSheet, View, StatusBar, Text } from "react-native";
+import { StyleSheet, View, StatusBar, Image } from "react-native";
 import Header from "../../components/Header";
 import Cronometro from "../../components/cronometro";
 import Times from "../../components/times";
@@ -6,21 +6,18 @@ import Placar from "../../components/Placar";
 
 export default function Home() {
   return (
-    <>
-      <StatusBar backgroundColor={"#20473c"} />
+    <View style={styles.container}>
+      <StatusBar backgroundColor={"#489404"} />
       <Header />
-      <View style={styles.container}>
-        <Cronometro />
-        <Placar />
-        <Times />
-      </View>
-    </>
+      <Cronometro />
+      <Placar />
+      <Times />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    top: -85,
   },
 });

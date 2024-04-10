@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
-  ImageBackground,
   Text,
   TouchableOpacity,
   Alert,
@@ -10,7 +8,6 @@ import {
 } from "react-native";
 import { MotiView } from "moti";
 import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
-import { json } from "react-router-dom";
 
 export default function ListaProximas() {
   const { jogadoresReservas, setJogadoresReservas } =
@@ -74,15 +71,20 @@ export default function ListaProximas() {
   );
 
   return (
-    <View>
-      <Text
+    <View
+      style={{ top: 110 }}
+    >
+      <View
+        style={styles.titleContainer}
+      ><Text
         onLongPress={() => alert(JSON.stringify(jogadoresReservas, null, 2))}
         style={styles.textTitle}
       >
-        {" "}
-        Banco de Reservas
-      </Text>
-      <View style={{ top: -55 }}>
+          {" "}
+          Banco de Reservas
+        </Text></View>
+
+      <View >
         <FlatList
           style={styles.scrollView}
           data={jogadoresReservas}
@@ -91,23 +93,22 @@ export default function ListaProximas() {
           numColumns={2}
           columnWrapperStyle={{ justifyContent: "space-between" }}
         />
-        <View style={styles.container}>
-          <View style={styles.inputContainer}>
-            <TouchableOpacity
-              style={styles.inputButton}
-              onLongPress={() => misturarReservas()}
-            >
-              <Text style={styles.inputButtonText}>Segure Para Misturar</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.inputContainer}>
-            <TouchableOpacity
-              style={styles.inputButton}
-              onPress={handleConfirmarTodos}
-            >
-              <Text style={styles.inputButtonText}>Limpar Próximas</Text>
-            </TouchableOpacity>
-          </View>
+
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onLongPress={() => misturarReservas()}
+          >
+            <Text style={styles.inputButtonText}>Segure Para Misturar</Text>
+          </TouchableOpacity>
+
+
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleConfirmarTodos}
+          >
+            <Text style={styles.inputButtonText}>Limpar Próximas</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -116,18 +117,25 @@ export default function ListaProximas() {
 const styles = StyleSheet.create({
   scrollView: {
     marginTop: 20,
-    height: 450,
+    height: 400,
     paddingLeft: 7,
     paddingRight: 7,
   },
+  titleContainer: {
+    backgroundColor: '#fff',
+    width: '90%',
+    alignSelf: 'center',
+    height: 70,
+    justifyContent: 'center',
+    borderRadius: 9
+  },
   textTitle: {
-    top: -65,
-    fontSize: 40,
+    fontSize: 30,
     textAlign: "center",
     flexWrap: "nowrap",
     width: "100%",
     fontWeight: "bold",
-    color: "#cece",
+    color: "#20473c",
   },
   jogadorText: {
     color: "#20473c",
@@ -140,26 +148,28 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 180,
     height: 40,
-    marginTop: 5,
     marginBottom: 5,
     backgroundColor: "#ffff",
     borderRadius: 7,
     elevation: 3,
   },
-  inputContainer: {
+
+  inputButtonText: {
+    color: "#000",
+    fontSize: 20,
+    textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  button: {
     alignSelf: "center",
-    top: 85,
-    backgroundColor: "#20473c",
-    borderRadius: 10,
-    marginBottom: 10,
+    backgroundColor: "#468f03",
+    borderRadius: 7,
+    marginVertical: 5,
     padding: 5,
     width: "90%",
   },
-  inputButton: {
-    alignItems: "center",
-  },
-  inputButtonText: {
-    color: "#fff",
-    fontSize: 20,
+  buttonContainer: {
+    width: "100%",
+    marginTop: 20,
   },
 });

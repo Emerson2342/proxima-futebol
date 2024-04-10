@@ -4,12 +4,12 @@
     "slug": "proxima",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/iconAndroid.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/icon.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#3f8d65"
+      "backgroundColor": "#489404"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,8 +19,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/iconAndroid.png",
-        "backgroundColor": "#3f8d65"
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#489404"
       },
       "package": "com.missinhoo.proxima"
     },

@@ -26,7 +26,7 @@ export function ModalEditarNome({ handleClose, handleEdit, nomeAtual, novoNome, 
                         <Text style={styles.buttonText}>Voltar</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        style={[styles.button, { backgroundColor: "#20473c" }]}
+                        style={[styles.button, { backgroundColor: "#489404" }]}
                         onPress={() => { handleEdit(novoNome, setNovoNome); setNovoNome(null) }}
                     >
                         <Text style={[styles.buttonText, { color: "#fff" }]}>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontWeight: "bold",
         paddingBottom: 15,
-        color: "#20473c"
+        color: "#489404"
     },
 
     input: {
@@ -68,9 +68,8 @@ const styles = StyleSheet.create({
         fontSize: 15,
         padding: 10,
         borderRadius: 7,
-        borderColor: "#20473c",
+        borderColor: "#489404",
         textAlign: "center"
-        // color: "#003b6b"
     },
     buttonArea: {
         flexDirection: "row",
@@ -86,10 +85,10 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 7,
         borderWidth: 2,
-        borderColor: "#20473c",
+        borderColor: "#489404",
     },
     buttonText: {
-        color: "#20473c",
+        color: "#489404",
         fontSize: 15,
         fontWeight: "bold",
     },

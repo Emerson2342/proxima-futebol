@@ -11,7 +11,9 @@ import { useState } from "react";
 const Tab = createBottomTabNavigator();
 
 export function Routes() {
-  const [apresentation, setApresentation] = useState(true);
+  const [apresentation, setApresentation] = useState(false);
+
+  const focus = '#489404'
 
   function App() {
     return (
@@ -19,14 +21,16 @@ export function Routes() {
         screenOptions={{
           headerShown: false,
           tabBarHideOnKeyboard: true,
-          tabBarShowLabel: false,
           tabBarStyle: {
             elevation: 0,
             borderTopWidth: 0,
             alignSelf: "center",
-            width: "95%",
-            backgroundColor: "#f2f2f2",
+            width: "100%",
+            backgroundColor: "#fff",
+            paddingBottom: 5,
+            height: 50,
           },
+          tabBarActiveTintColor: focus
         }}
       >
         <Tab.Screen
@@ -39,7 +43,7 @@ export function Routes() {
                   <MaterialCommunityIcons
                     name="whistle"
                     size={30}
-                    color={"#20473c"}
+                    color={focus}
                     style={styles.icon}
                   />
                 );
@@ -48,7 +52,7 @@ export function Routes() {
                 <MaterialCommunityIcons
                   name="whistle-outline"
                   size={30}
-                  color={"#20473c"}
+                  color={"#c9c9c9"}
                 />
               );
             },
@@ -65,7 +69,7 @@ export function Routes() {
                   <MaterialCommunityIcons
                     name="clipboard-edit"
                     size={30}
-                    color={"#20473c"}
+                    color={focus}
                     style={styles.icon}
                   />
                 );
@@ -74,7 +78,7 @@ export function Routes() {
                 <MaterialCommunityIcons
                   name="clipboard-edit-outline"
                   size={30}
-                  color={"#20473c"}
+                  color={"#c9c9c9"}
                 />
               );
             },
@@ -90,7 +94,7 @@ export function Routes() {
                   <MaterialCommunityIcons
                     name="account-multiple-plus"
                     size={35}
-                    color={"#20473c"}
+                    color={focus}
                     style={styles.icon}
                   />
                 );
@@ -99,7 +103,7 @@ export function Routes() {
                 <MaterialCommunityIcons
                   name="account-multiple-plus-outline"
                   size={35}
-                  color={"#20473c"}
+                  color={"#c9c9c9"}
                 />
               );
             },
@@ -115,7 +119,7 @@ export function Routes() {
                   <MaterialCommunityIcons
                     name="medal"
                     size={30}
-                    color={"#20473c"}
+                    color={focus}
                     style={styles.icon}
                   />
                 );
@@ -124,7 +128,7 @@ export function Routes() {
                 <MaterialCommunityIcons
                   name="medal-outline"
                   size={30}
-                  color={"#20473c"}
+                  color={"#c9c9c9"}
                 />
               );
             },
@@ -153,8 +157,6 @@ export function Routes() {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#f2f2f2" },
   icon: {
-    backgroundColor: "#cece",
-    borderWidth: 1,
     width: "70%",
     alignSelf: "center",
     borderRadius: 5,

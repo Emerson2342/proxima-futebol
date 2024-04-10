@@ -135,7 +135,7 @@ export default function ListadeJogadores() {
       <TouchableOpacity
         style={
           item.selected
-            ? styles.jogadorContainerSelected
+            ? [styles.jogadorContainer, { backgroundColor: '#489404' }]
             : styles.jogadorContainer
         }
         onPress={() => handleSelect(item)}
@@ -143,7 +143,7 @@ export default function ListadeJogadores() {
       >
         <Text
           style={
-            item.selected ? styles.jogadorTextSelected : styles.jogadorText
+            item.selected ? [styles.jogadorText, { color: '#000' }] : styles.jogadorText
           }
         >
           {item.jogador}
@@ -154,12 +154,15 @@ export default function ListadeJogadores() {
 
   return (
     <View style={styles.container}>
-      <Text
-        onLongPress={() => alert(JSON.stringify(listaDeJogadores, null, 2))}
-        style={styles.textTitle}
+      <View
+        style={styles.titleContainer}
       >
-        Jogadores
-      </Text>
+        <Text
+          onLongPress={() => alert(JSON.stringify(listaDeJogadores, null, 2))}
+          style={styles.textTitle}
+        >Jogadores
+        </Text>
+      </View>
 
       <FlatList
         style={styles.scrollView}
@@ -173,16 +176,16 @@ export default function ListadeJogadores() {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={() => addParaReserva()}
-          style={styles.inputContainer}
+          style={styles.button}
         >
-          <Text style={styles.inputButtonText}>Enviar para a reserva</Text>
+          <Text style={styles.textButton}>Enviar para a reserva</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={() => setModalAddVisible(true)}
-          style={styles.inputContainer}
+          style={styles.button}
         >
-          <Text style={styles.inputButtonText}>Adicione um novo jogador</Text>
+          <Text style={styles.textButton}>Adicione um novo jogador</Text>
         </TouchableOpacity>
       </View>
       <Modal visible={modalAddVisible} transparent={true} animationType="slide">
@@ -206,44 +209,26 @@ export default function ListadeJogadores() {
           nomeAtual={nomeParaEditar}
         />
       </Modal>
-    </View>
+    </View >
   );
 }
 const styles = StyleSheet.create({
+  container: {
+    top: 110,
+  },
+  titleContainer: {
+    backgroundColor: '#fff',
+    width: '90%',
+    alignSelf: 'center',
+    height: 70,
+    justifyContent: 'center',
+    borderRadius: 9
+  },
   scrollView: {
-    top: 30,
-    height: 460,
+    marginTop: 20,
+    height: 400,
     paddingLeft: 7,
     paddingRight: 7,
-  },
-  /*   textTitle: {
-    // fontSize: 40,
-    textAlign: "center",
-    flexWrap: "nowrap",
-    width: "100%",
-    fontWeight: "bold",
-    color: "#cece",
-  }, */
-  jogadorContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: 180,
-    height: 40,
-    marginVertical: 7,
-    borderColor: "#20473c",
-    backgroundColor: "#fff",
-    elevation: 3,
-    borderRadius: 7,
-  },
-  jogadorContainerSelected: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: 180,
-    height: 40,
-    marginVertical: 7,
-    backgroundColor: "#20473c",
-    borderRadius: 7,
-    elevation: 3,
   },
   jogadorText: {
     color: "#000",
@@ -253,49 +238,25 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     flex: 1,
   },
-  jogadorTextSelected: {
-    color: "#fff",
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 17,
-    flexWrap: "wrap",
-    flex: 1,
-  },
-  scrollView: {
-    top: 30,
-    height: 460,
-    paddingLeft: 7,
-    paddingRight: 7,
-  },
   textTitle: {
-    fontSize: 40,
+    fontSize: 30,
     textAlign: "center",
     flexWrap: "nowrap",
     width: "100%",
     fontWeight: "bold",
-    color: "#cece",
+    color: "#20473c",
   },
   jogadorContainer: {
     flexDirection: "row",
     alignItems: "center",
     width: 180,
     height: 40,
-    marginVertical: 7,
-    borderColor: "#20473c",
+    marginVertical: 5,
     backgroundColor: "#fff",
     elevation: 3,
-    borderRadius: 7,
+    borderRadius: 5,
   },
-  jogadorContainerSelected: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: 180,
-    height: 40,
-    marginVertical: 7,
-    backgroundColor: "#20473c",
-    borderRadius: 7,
-    elevation: 3,
-  },
+
   jogadorText: {
     color: "#20473c",
     textAlign: "center",
@@ -304,45 +265,23 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     flex: 1,
   },
-  jogadorTextSelected: {
-    color: "#fff",
-    textAlign: "center",
-    fontWeight: "bold",
-    fontSize: 17,
-    flexWrap: "wrap",
-    flex: 1,
-  },
 
-  inputContainer: {
+  button: {
     alignSelf: "center",
-    top: 15,
-    backgroundColor: "#20473c",
-    borderRadius: 10,
-    marginBottom: 10,
-    padding: 10,
-    width: "90%",
-  },
-  inputContainer: {
-    alignSelf: "center",
-    top: 15,
-    backgroundColor: "#20473c",
-    borderRadius: 10,
-    marginBottom: 10,
+    backgroundColor: "#489404",
+    borderRadius: 7,
+    marginVertical: 5,
     padding: 5,
     width: "90%",
   },
-
-  container: {
-    top: -65,
-  },
-  inputButtonText: {
-    textAlign: "center",
-    color: "#fff",
+  textButton: {
+    color: "#000",
     fontSize: 20,
+    textAlign: "center",
+    fontWeight: 'bold'
   },
   buttonContainer: {
-    marginTop: 90,
-    justifyContent: "center",
     width: "100%",
+    marginTop: 20,
   },
 });

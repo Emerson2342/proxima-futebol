@@ -201,19 +201,19 @@ export default function Times() {
 
         <View style={styles.icones}>
           <TouchableOpacity onPress={() => gol1(index)}>
-            <FontAwesome name="soccer-ball-o" size={25} />
+            <FontAwesome name="soccer-ball-o" size={20} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => assist1(index)}>
             <Image
-              style={{ objectFit: "contain", height: 30 }}
+              style={{ objectFit: "contain", height: 25 }}
               source={require("../../../assets/assist.png")}
             />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => adicionarJogador1(index)}>
-            <Entypo name="arrow-up" color={"green"} size={30} />
+            <Entypo name="arrow-up" color={"#3cc455"} size={25} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => removerJogador1(index)}>
-            <Entypo name="arrow-down" color={"red"} size={30} />
+            <Entypo name="arrow-down" color={"red"} size={25} />
           </TouchableOpacity>
         </View>
       </MotiView>
@@ -235,19 +235,19 @@ export default function Times() {
       </MotiView>
       <View style={styles.icones}>
         <TouchableOpacity onPress={() => gol2(index)}>
-          <FontAwesome name="soccer-ball-o" size={25} />
+          <FontAwesome name="soccer-ball-o" size={20} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => assist2(index)}>
           <Image
-            style={{ objectFit: "contain", height: 30 }}
+            style={{ objectFit: "contain", height: 25 }}
             source={require("../../../assets/assist.png")}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => adicionarJogador2(index)}>
-          <Entypo name="arrow-up" color={"green"} size={30} />
+          <Entypo name="arrow-up" color={"#3cc455"} size={25} />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => removerJogador2(index)}>
-          <Entypo name="arrow-down" color={"red"} size={30} />
+          <Entypo name="arrow-down" color={"red"} size={25} />
         </TouchableOpacity>
       </View>
     </MotiView>
@@ -294,7 +294,7 @@ export default function Times() {
 }
 const styles = StyleSheet.create({
   container: {
-    top: -20,
+    top: 80,
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10,
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
     // elevation: 5,
     height: 40,
     padding: 3,
-    borderColor: "#20473c",
+    //borderColor: "#20473c",
     borderWidth: 1,
   },
   text: {

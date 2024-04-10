@@ -15,12 +15,12 @@ export default function Cronometro() {
   };
   const handleIncrement = () => {
     setKey((prevKey) => prevKey + 1);
-    setTime((asdf) => asdf + 30);
+    setTime((asdf) => asdf + 60);
     setPlaying(false);
   };
   const handleDecrement = () => {
     setKey((prevKey) => prevKey + 1);
-    setTime((prevTime) => Math.max(0, prevTime - 30));
+    setTime((prevTime) => Math.max(0, prevTime - 60));
     setPlaying(false);
   };
 
@@ -38,41 +38,45 @@ export default function Cronometro() {
             <AntDesign
               name={playing ? "pause" : "caretright"}
               size={30}
-              color={"#cece"}
+              color={"#20473c"}
             />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleReset()}>
-            <Entypo name={"cw"} size={25} color={"#cece"} />
+            <Entypo name={"cw"} size={25} color={"#20473c"} />
           </TouchableOpacity>
         </View>
-        <CountdownCircleTimer
-          key={key}
-          size={100}
-          isPlaying={playing}
-          duration={time < 0 ? 0 : time}
-          colors={["#89ff68", "#00fbff", "#FF0000", "#FF0000"]}
-          colorsTime={[20, 15, 10, 0]}
-          onComplete={() => {
-            Alert.alert("", "Fim de jogo");
-            handleReset();
-          }}
-          strokeWidth={0}
-          trailColor={"#cece"}
+        <View
+          style={{ top: -35 }}
         >
-          {({ remainingTime }) => (
-            <Text style={styles.tempoText}>
-              {`${Math.floor(remainingTime / 60)}:${String(
-                remainingTime % 60
-              ).padStart(2, "0")}`}
-            </Text>
-          )}
-        </CountdownCircleTimer>
+          <CountdownCircleTimer
+            key={key}
+            size={120}
+            isPlaying={playing}
+            duration={time < 0 ? 0 : time}
+            colors={["#89ff68", "#00fbff", "#FF0000", "#FF0000"]}
+            colorsTime={[20, 15, 10, 0]}
+            onComplete={() => {
+              Alert.alert("", "Fim de jogo");
+              handleReset();
+            }}
+            strokeWidth={0}
+            trailColor={"#000"}
+          >
+            {({ remainingTime }) => (
+              <Text style={styles.tempoText}>
+                {`${Math.floor(remainingTime / 60)}:${String(
+                  remainingTime % 60
+                ).padStart(2, "0")}`}
+              </Text>
+            )}
+          </CountdownCircleTimer>
+        </View>
         <View style={styles.buttonContent}>
           <TouchableOpacity onPress={() => handleIncrement()}>
-            <FontAwesome name={"plus"} size={20} color={"#cece"} />
+            <FontAwesome name={"plus"} size={20} color={"#20473c"} />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => handleDecrement()}>
-            <FontAwesome name={"minus"} size={20} color={"#cece"} />
+            <FontAwesome name={"minus"} size={20} color={"#20473c"} />
           </TouchableOpacity>
         </View>
       </View>
@@ -84,9 +88,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignSelf: "center",
     flexDirection: "row",
+    backgroundColor: '#fff',
+    marginLeft: 30,
+    marginRight: 30,
+    height: 50,
+    top: 90,
+    width: '90%',
+    alignSelf: 'center',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   },
   tempoText: {
-    color: "#cece",
+    color: "#20473c",
     fontSize: 35,
     fontWeight: "bold",
   },

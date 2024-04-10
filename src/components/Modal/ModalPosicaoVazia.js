@@ -43,12 +43,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         borderRadius: 5,
         borderWidth: 1,
-        borderColor: "#20473c",
+        borderColor: "#003b6b",
     },
     text: {
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: "center",
-        color: "#20473c",
+        color: "#003b6b",
     },
 });
