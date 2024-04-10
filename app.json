@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#489404"
+      "backgroundColor": "#93dc4f"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -20,7 +20,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#489404"
+        "backgroundColor": "#93dc4f"
       },
       "package": "com.missinhoo.proxima"
     },

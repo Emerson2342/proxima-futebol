@@ -36,10 +36,10 @@ export default function Artilheiros() {
           <Text style={styles.listItem}>{item.jogador}</Text>
         </View>
         <View style={styles.itemGol}>
-          <Text style={styles.listItem}>{item.gols}</Text>
+          <Text style={[styles.listItem, { color: '#20473c' }]}>{item.gols}</Text>
         </View>
         <View style={styles.itemAssist}>
-          <Text style={styles.listItem}>{item.assist}</Text>
+          <Text style={[styles.listItem, { color: '#20473c' }]}>{item.assist}</Text>
         </View>
       </View>
     );
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   listItem: {
-    color: "#20473c",
+    color: "#ffa200",
     fontSize: 15,
     textAlign: "left",
   },

@@ -36,7 +36,7 @@ export default function Times() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setInitialRender(false);
-    }, 3000);
+    }, 5000);
 
     return () => clearTimeout(timer); // Limpa o timer em caso de desmontagem do componente
   }, []);

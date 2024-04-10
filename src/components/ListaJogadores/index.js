@@ -135,7 +135,7 @@ export default function ListadeJogadores() {
       <TouchableOpacity
         style={
           item.selected
-            ? [styles.jogadorContainer, { backgroundColor: '#489404' }]
+            ? [styles.jogadorContainer, { backgroundColor: '#ffa200' }]
             : styles.jogadorContainer
         }
         onPress={() => handleSelect(item)}
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
 
   button: {
     alignSelf: "center",
-    backgroundColor: "#489404",
+    backgroundColor: "#93dc4f",
     borderRadius: 7,
     marginVertical: 5,
     padding: 5,

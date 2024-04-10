@@ -150,7 +150,7 @@ export function Routes() {
   }
   return (
     <View style={styles.container}>
-      {apresentation ? <Instructions /> : <App />}
+      <App />
     </View>
   );
 }
