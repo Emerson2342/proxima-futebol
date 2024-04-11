@@ -2,7 +2,7 @@
 ![Alterar Nome do Jogador](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/inicial.jpeg)
 ![Alterar Nome do Jogador](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/ajuda.jpeg)
 ![Página Principal](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/partida.jpeg)
-<!-- ![Reservas](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/reservas.jpeg) -->
+![Reservas](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/reservas.jpeg)
 ![Lista de Jogadores](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/listaGeral.jpeg)
 ![Artilharia](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/artilharia.jpeg)
 ![Artilharia](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/confirmarZerar.jpeg)
