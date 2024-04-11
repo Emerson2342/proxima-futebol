@@ -1,9 +1,13 @@
-import React from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, FlatList, TouchableOpacity, Modal } from "react-native";
 import { useJogadorContext } from "../../context/JogadoresContext";
+import ModalConfirmarZerar from "../Modal/ModalConfirmarZerar";
+
 
 export default function Artilheiros() {
   const { listaDeJogadores } = useJogadorContext();
+
+  const [modalVisible, setModalVisible] = useState(false);
 
   const gols = listaDeJogadores
     .filter((item) => item !== null)
@@ -78,6 +82,23 @@ export default function Artilheiros() {
           renderItem={renderItemGols}
         />
       </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => setModalVisible(true)}
+        >
+          <Text style={styles.inputButtonText}>Zerar Contador</Text>
+        </TouchableOpacity>
+      </View>
+      <Modal
+        visible={modalVisible}
+        transparent={true}
+        animationType="fade"
+      >
+        <ModalConfirmarZerar
+          handleClose={() => setModalVisible(false)}
+        />
+      </Modal>
     </View>
   );
 }
@@ -116,7 +137,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   column: {
-    maxHeight: 450,
+    height: 480,
     alignItems: "center",
     marginBottom: 25,
   },
@@ -158,5 +179,23 @@ const styles = StyleSheet.create({
     color: "#20473c",
     fontSize: 15,
     textAlign: "left",
+  },
+  inputButtonText: {
+    color: "#20473c",
+    fontSize: 20,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+  button: {
+    alignSelf: "center",
+    backgroundColor: "#93dc4f",
+    borderRadius: 7,
+    marginVertical: 5,
+    padding: 5,
+    width: "90%",
+  },
+  buttonContainer: {
+    width: "100%",
+    top: 20
   },
 });

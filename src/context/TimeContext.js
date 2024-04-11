@@ -14,13 +14,19 @@ export const TimeProvider = ({ children }) => {
     },
   ];
 
+  const [numJogadores, setNumJogadores] = useState(5)
+
   const [timeTitular1, setTimeTitular1] = useState(
-    Array.from({ length: 5 }, createEmptyPlayer)
+    Array.from({ length: numJogadores }, createEmptyPlayer)
   );
 
   const [timeTitular2, setTimeTitular2] = useState(
-    Array.from({ length: 5 }, createEmptyPlayer)
+    Array.from({ length: numJogadores }, createEmptyPlayer)
   );
+  useEffect(() => {
+    setTimeTitular1(Array.from({ length: numJogadores }, createEmptyPlayer));
+    setTimeTitular2(Array.from({ length: numJogadores }, createEmptyPlayer));
+  }, [numJogadores])
 
   useEffect(() => {
     const loadData = async () => {
@@ -30,6 +36,7 @@ export const TimeProvider = ({ children }) => {
           const parsedData = JSON.parse(storedData);
           setTimeTitular1(parsedData.timeTitular1 || []);
           setTimeTitular2(parsedData.timeTitular2 || []);
+          setNumJogadores(parsedData.numJogadores || 5);
         }
       } catch (error) {
         console.error("Error loading data from AsyncStorage:", error);
@@ -45,6 +52,7 @@ export const TimeProvider = ({ children }) => {
         const dataToSave = {
           timeTitular1,
           timeTitular2,
+          numJogadores
         };
         await AsyncStorage.setItem("timeData", JSON.stringify(dataToSave));
       } catch (error) {
@@ -53,11 +61,11 @@ export const TimeProvider = ({ children }) => {
     };
 
     saveData();
-  }, [timeTitular1, timeTitular2]);
+  }, [timeTitular1, timeTitular2, numJogadores]);
 
   return (
     <TimeContext.Provider
-      value={{ timeTitular1, setTimeTitular1, timeTitular2, setTimeTitular2 }}
+      value={{ timeTitular1, setTimeTitular1, timeTitular2, setTimeTitular2, numJogadores, setNumJogadores }}
     >
       {children}
     </TimeContext.Provider>

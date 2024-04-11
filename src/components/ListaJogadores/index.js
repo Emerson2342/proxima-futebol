@@ -186,7 +186,7 @@ export default function ListadeJogadores() {
           <Text style={styles.textButton}>Adicione um novo jogador</Text>
         </TouchableOpacity>
       </View>
-      <Modal visible={modalAddVisible} transparent={true} animationType="slide">
+      <Modal visible={modalAddVisible} transparent={true} animationType="fade">
         <ModalAddProxima
           nome={nome}
           setNome={setNome}
@@ -197,7 +197,7 @@ export default function ListadeJogadores() {
       <Modal
         visible={modalNomeVisible}
         transparent={true}
-        animationType="slide"
+        animationType="fade"
       >
         <ModalEditarNome
           handleEdit={() => handleEdit(idParaEditar, novoNome, setNovoNome)}
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     marginTop: 20,
-    height: 400,
+    height: 480,
     paddingLeft: 7,
     paddingRight: 7,
   },
@@ -280,6 +280,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
-    marginTop: 50,
+    // marginTop: 80,
   },
 });

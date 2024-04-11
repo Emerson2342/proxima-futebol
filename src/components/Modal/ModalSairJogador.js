@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 
-export default function ModalPosicaoVazia({ handleClose }) {
+export default function ModalSairJogador({ handleClose }) {
   const [tempoDecorrido, setTempoDecorrido] = useState(0);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function ModalPosicaoVazia({ handleClose }) {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.text}>Não há jogador nesta posição!</Text>
+        <Text style={styles.text}>Jogador Precisa Sair Antes!</Text>
       </View>
     </View>
   );

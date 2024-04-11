@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 
-export default function ModalPosicaoVazia({ handleClose }) {
+export default function ModalAlterarTime({ handleClose }) {
   const [tempoDecorrido, setTempoDecorrido] = useState(0);
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       handleClose();
-    }, 1500);
+    }, 3500);
 
     const intervalId = setInterval(() => {
       setTempoDecorrido((tempoAnterior) => tempoAnterior + 1);
@@ -22,7 +22,7 @@ export default function ModalPosicaoVazia({ handleClose }) {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Text style={styles.text}>Não há jogador nesta posição!</Text>
+        <Text style={styles.text}>Ambos os times têm que estarem vazios para alterar a quantidade de jogadores!</Text>
       </View>
     </View>
   );

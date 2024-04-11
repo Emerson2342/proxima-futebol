@@ -7,11 +7,13 @@ import Rank from "./Rank";
 import ListaJogadores from "./ListaJogadores";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useState } from "react";
+import { Apresentacao } from "./Home/instructions";
+import * as Animatable from "react-native-animatable";
 
 const Tab = createBottomTabNavigator();
 
 export function Routes() {
-  const [apresentation, setApresentation] = useState(false);
+  const [apresentation, setApresentation] = useState(true);
 
   const focus = '#489404'
 
@@ -138,19 +140,28 @@ export function Routes() {
     );
   }
 
-  function Instructions() {
+  function TelaApresentacao() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Instruções</Text>
-        <TouchableOpacity onPress={() => setApresentation(false)}>
-          <Text>Ir para o aplicativo</Text>
-        </TouchableOpacity>
+      <View style={{ justifyContent: "flex-end", alignItems: "center" }}>
+        <Apresentacao />
+        <Animatable.View
+          style={styles.button}
+          animation="slideInUp" duration={1500}
+        >
+          <TouchableOpacity
+            onPress={() => setApresentation(false)}>
+            <Text
+              style={{ textAlign: 'center', fontWeight: 'bold', fontSize: 20 }}
+            >Ir para o aplicativo</Text>
+          </TouchableOpacity>
+        </Animatable.View>
       </View>
     );
   }
   return (
     <View style={styles.container}>
-      <App />
+
+      {apresentation ? < TelaApresentacao /> : <App />}
     </View>
   );
 }
@@ -162,4 +173,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     textAlign: "center",
   },
+  button: {
+    top: 200,
+    width: '80%',
+    backgroundColor: "#93dc4f",
+    padding: 10,
+    borderRadius: 15
+
+  }
 });

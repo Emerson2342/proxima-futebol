@@ -23,12 +23,12 @@ export default function Placar() {
           onPress={() => {
             setEditarNomeVisible(true);
             setIndexToEdit(1);
-          }}
-          style={{ width: "70%", marginLeft: 10 }}
-        >
+          }}>
           <Text style={styles.text}>{nomeTime1}</Text>
         </TouchableOpacity>
-        <View style={{ width: "20%" }}>
+        <View
+          style={{ width: '25%' }}
+        >
           <Text style={[styles.text, styles.textPlacar]}>{golsTime1}</Text>
         </View>
       </View>
@@ -45,17 +45,17 @@ export default function Placar() {
       >
         <Text style={styles.text}>x</Text>
       </TouchableOpacity>
-      <View style={styles.timeContainer}>
-        <View style={{ width: "25%" }}>
+      <View style={[styles.timeContainer, { justifyContent: 'flex-start' }]}>
+        <View
+          style={{ width: "25%" }}
+        >
           <Text style={[styles.text, styles.textPlacar]}>{golsTime2}</Text>
         </View>
         <TouchableOpacity
           onPress={() => {
             setEditarNomeVisible(true);
             setIndexToEdit(2);
-          }}
-          style={{ width: "70%", marginRight: 10 }}
-        >
+          }}>
           <Text style={styles.text}>{nomeTime2}</Text>
         </TouchableOpacity>
       </View>
@@ -78,26 +78,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     top: 60,
-    width: "90%",
+    width: "95%",
     alignSelf: "center",
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    height: 50,
     marginBottom: 15,
   },
   timeContainer: {
     flexDirection: "row",
-    width: "47%",
+    width: "48%",
     overflow: "hidden",
     alignItems: "center",
+    justifyContent: 'flex-end',
   },
   text: {
-    fontSize: 30,
+    fontSize: 20,
     textAlign: "center",
     fontWeight: "bold",
     color: "#20473c",
   },
   textPlacar: {
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: "bold",
     color: "#20473c",
   },

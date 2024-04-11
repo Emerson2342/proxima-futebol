@@ -88,7 +88,7 @@ export default function ListaProximas() {
             style={styles.button}
             onLongPress={() => misturarReservas()}
           >
-            <Text style={styles.inputButtonText}>Segure Para Misturar</Text>
+            <Text style={styles.inputButtonText}>Segure Para Sortear</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -105,7 +105,7 @@ export default function ListaProximas() {
 const styles = StyleSheet.create({
   scrollView: {
     marginTop: 20,
-    height: 400,
+    height: 480,
     paddingLeft: 7,
     paddingRight: 7,
   },
@@ -158,6 +158,5 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     width: "100%",
-    marginTop: 50,
   },
 });

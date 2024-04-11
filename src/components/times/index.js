@@ -14,15 +14,20 @@ import { MotiView, MotiText } from "moti";
 
 import ModalPosicaoVazia from "../Modal/ModalPosicaoVazia";
 import ModalReservaVazia from "../Modal/ModalReservaVazia";
+import ModalSairJogador from "../Modal/ModalSairJogador";
+import ModalAlterarTime from '../Modal/ModalAlterarTime';
+import ModalAjuda from "../Modal/ModalAjuda";
 
 import { useJogadorContext } from "../../context/JogadoresContext";
 import { useJogadoresReservasContext } from "../../context/JogadoresReservasContext";
 import { useTimeContext } from "../../context/TimeContext";
 import { usePlacarContext } from "../../context/PlacarContext";
 
+
 export default function Times() {
-  const { timeTitular1, setTimeTitular1, timeTitular2, setTimeTitular2 } =
+  const { timeTitular1, setTimeTitular1, timeTitular2, setTimeTitular2, numJogadores, setNumJogadores } =
     useTimeContext();
+
   const { jogadoresReservas, setJogadoresReservas } =
     useJogadoresReservasContext();
   const { listaDeJogadores, setListaDeJogadores } = useJogadorContext();
@@ -30,6 +35,9 @@ export default function Times() {
 
   const [posicaoVaziaVisible, setPosicaoVaziaVisible] = useState(false);
   const [reservaVaziaVisible, setReservaVaziaVisible] = useState(false);
+  const [sairJogadorVisible, setSairJogadorVisible] = useState(false);
+  const [modalAlterarTime, setModalAlterarTime] = useState(false);
+  const [modalAjudaVisible, setModalVisibleAjuda] = useState(false);
 
   const [initialRender, setInitialRender] = useState(true);
 
@@ -38,8 +46,28 @@ export default function Times() {
       setInitialRender(false);
     }, 5000);
 
-    return () => clearTimeout(timer); // Limpa o timer em caso de desmontagem do componente
+    return () => clearTimeout(timer);
   }, []);
+
+  const handleIncrement = () => {
+    if (timeTitular1.find(jogador => jogador.id != null)
+      || timeTitular2.find(jogador => jogador.id != null)
+    ) {
+      setModalAlterarTime(true);
+    } else {
+      setNumJogadores((asdf) => asdf + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (timeTitular1.find(jogador => jogador.id != null)
+      || timeTitular2.find(jogador => jogador.id != null)
+    ) {
+      setModalAlterarTime(true);
+    } else {
+      setNumJogadores(prevTime => Math.max(0, prevTime - 1));
+    }
+  };
 
   const removerJogador1 = (index) => {
     const removedItem = timeTitular1[index];
@@ -86,7 +114,7 @@ export default function Times() {
       } else {
         setReservaVaziaVisible(true);
       }
-    } else Alert.alert("", "Jogador precisa sair antes!");
+    } else setSairJogadorVisible(true);
   };
 
   const adicionarJogador2 = (index) => {
@@ -100,7 +128,7 @@ export default function Times() {
       } else {
         setReservaVaziaVisible(true);
       }
-    } else Alert.alert("", "Jogador precisa sair antes!");
+    } else setSairJogadorVisible(true);
   };
 
   const gol1 = (index) => {
@@ -186,7 +214,7 @@ export default function Times() {
   const renderItem1 = ({ item, index }) => {
     return (
       <MotiView
-        style={{ paddingVertical: 10 }}
+        style={{ paddingVertical: 3 }}
         from={initialRender ? { translateX: -150, opacity: 0 } : undefined}
         animate={initialRender ? { translateX: 0, opacity: 1 } : undefined}
         transition={{ type: "timing", duration: 1000 + index * 500 }}
@@ -221,7 +249,7 @@ export default function Times() {
   };
   const renderItem2 = ({ item, index }) => (
     <MotiView
-      style={{ paddingVertical: 10 }}
+      style={{ paddingVertical: 3 }}
       from={initialRender ? { translateX: 150, opacity: 0 } : undefined}
       animate={initialRender ? { translateX: 0, opacity: 1 } : undefined}
       transition={{ type: "timing", duration: 1000 + index * 500 }}
@@ -254,7 +282,7 @@ export default function Times() {
   );
 
   return (
-    <View style={{ marginTop: 0 }}>
+    <View style={{ top: 50 }} >
       <View style={styles.container}>
         <View style={styles.timeContainer}>
           <FlatList
@@ -275,6 +303,45 @@ export default function Times() {
           />
         </View>
       </View>
+      <View style={styles.options}>
+        <View
+          style={{ width: '50%' }}
+        >
+          <Text
+            style={styles.titleOptions}
+          >
+            Jogadores por Time
+          </Text>
+          <View
+            style={styles.buttonOptions}>
+            <TouchableOpacity
+              style={{ alignSelf: 'center', alignItems: 'center', width: '40%' }}
+              onPress={() => handleIncrement()}
+            >
+              <FontAwesome name={"plus"} size={20} color={"#20473c"} />
+            </TouchableOpacity>
+            <Text
+              style={styles.textOptions}
+            >{numJogadores}</Text>
+            <TouchableOpacity
+              style={{ alignSelf: 'center', alignItems: 'center', width: '40%' }}
+              onPress={() => handleDecrement()}
+            >
+              <FontAwesome name={"minus"} size={20} color={"#20473c"} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={{ width: '50%', alignItems: 'center' }}>
+          <Text style={styles.titleOptions}>Ajuda</Text>
+          <TouchableOpacity
+
+            onPress={() => setModalVisibleAjuda(true)}
+          >
+            <Entypo name={"help"} size={20} color={"#20473c"} />
+          </TouchableOpacity>
+        </View>
+      </View>
+
       <Modal
         visible={posicaoVaziaVisible}
         animationType="fade"
@@ -289,17 +356,44 @@ export default function Times() {
       >
         <ModalReservaVazia handleClose={() => setReservaVaziaVisible(false)} />
       </Modal>
+
+      <Modal
+        visible={sairJogadorVisible}
+        animationType="fade"
+        transparent={true}>
+        <ModalSairJogador
+          handleClose={() => setSairJogadorVisible(false)}
+        />
+      </Modal>
+      <Modal
+        visible={modalAlterarTime}
+        animationType="fade"
+        transparent={true}
+      >
+        <ModalAlterarTime
+          handleClose={() => setModalAlterarTime(false)}
+        />
+      </Modal>
+      <Modal
+        visible={modalAjudaVisible}
+        animationType="fade"
+        transparent={true}
+      >
+        <ModalAjuda
+          handleClose={() => setModalVisibleAjuda(false)}
+        />
+
+      </Modal>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    top: 50,
     flexDirection: "row",
     justifyContent: "space-around",
     padding: 10,
+    height: 450,
   },
-
   timeContainer: {
     alignSelf: "center",
     width: "48%",
@@ -307,10 +401,7 @@ const styles = StyleSheet.create({
   textContainer: {
     backgroundColor: "#fff",
     borderRadius: 5,
-    // elevation: 5,
-    height: 40,
     padding: 3,
-    //borderColor: "#20473c",
     borderWidth: 1,
   },
   text: {
@@ -325,4 +416,28 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     padding: 3,
   },
+  options: {
+    width: '100%',
+    margin: 10,
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  titleOptions: {
+    fontSize: 15,
+    fontStyle: 'italic',
+    fontWeight: '500',
+    color: '#20473c',
+    textAlign: 'center'
+  },
+  buttonOptions: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '50%',
+    alignSelf: 'center'
+  },
+  textOptions: {
+    fontSize: 25,
+    color: "#20473c"
+  }
 });
