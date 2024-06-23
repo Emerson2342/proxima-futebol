@@ -1,48 +1,67 @@
 
-![Demonstração](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/exemplo.gif)
-![Alterar Nome do Jogador](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/inicial.jpeg)
-![Alterar Nome do Jogador](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/ajuda.jpeg)
-![Página Principal](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/partida.jpeg)
-![Reservas](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/proxima.jpeg)
-![Lista de Jogadores](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/listaGeral.jpeg)
-![Artilharia](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/artilharia.jpeg)
-![Artilharia](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/confirmarZerar.jpeg)
-![Adicionar Jogador](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/adicionarJogador.jpeg)
-![Alterar Nome do Jogador](https://github.com/Emerson2342/proxima-futebol/blob/main/Imagens/alterarNome.jpeg)
+# Futebol Amigos App
+
+Um aplicativo mobile para organizar partidas de futebol entre amigos, substituindo a tradicional prancheta.
+
+## Funcionalidades Principais
+
+- **Lista Geral de Jogadores:**
+  - Adicione jogadores à lista geral.
+
+- **Banco de Reservas Dinâmico:**
+  - Mova jogadores para o banco de reservas e organize-os livremente para evitar panelinhas.
+
+- **Seleção de Jogadores:**
+  - Escolha e adicione jogadores em ordem de fila para cada posição no time.
+
+- **Marcação de Gols e Assistências:**
+  - Registre gols e assistências durante a partida, automaticamente atualizando estatísticas individuais.
 
 
+## Instalação
 
-#Informações
+### Android
 
-Aplicativo para auxiliar na hora de marcar uma partida de futebol substituindo a velha prancheta para marcar os times, sortear, adicionar próxima, tirar próxima e com uma tela para mostrar o rank de gols e assistências.
+1. Faça o download do APK mais recente do [Aplicativo](https://github.com/Emerson2342/proxima-futebol/releases/).
+2. Instale o APK no seu dispositivo Android.
 
-#Instalação
+### iOS
 
-Aplicativo feito para usar no android. Sendo uma aplicação fora da play store, vai ser necessário permitir instalar aplicações de fontes não confiáveis.
+Atualmente não suportado.
 
-#Suporte
+## Como Usar
 
-Para suporte ou feedback, entre em contato via WhatsApp: +55 (61) 99835-4398 (https://wa.me/5561998354398) ou pelo email: lyncoln_erc@hotmail.com
+- **Configuração Inicial:**
+  - Configure as preferências do jogo, como número de jogadores e duração da partida.
+  - Só é possível alterar a quantidade de jogadores com ambos os times limpos.
 
-#Páginas
+- **Durante a Partida:**
+  - Adicione jogadores novos à lista de jogadores na terceira screen.
+  - Para iniciar o sorteio, selecione os jogadores que vão jogar para o banco de reservas.
+  - No Banco de Reservas, caso deseje, misture os jogadores para sorteá-los.
+  - Na tela inicial, vai adicionando clicando na seta verde e para remover na seta vermelha, eles serão adicionados em forma de fila, primeiro do Reservas entra e quando removido do time, entra no final da lista de reservas.
+  - Marque gols e assistências diretamente pelo aplicativo.
+  - Ao finalizar as partidas, é recomendado limpar os times e o banco de reservas.
 
-São 4 páginas para navegar: primeira é para adicionar ou remover alguém do time principal, segunda é para misturar a lista de próxima ou apagar a lista, terceira para adicionar jogadores novos e mandar para a lista de reserva e última mostra o
-rank da artilharia.
+## Licença
+[![License](https://img.shields.io/badge/License-Custom-blue.svg)](LICENSE)
 
-#Reserva
+-**Suporte**
+    Para suporte ou feedback, entre em contato via WhatsApp: +55 (61) 99835-4398 (https://wa.me/5561998354398) ou pelo email: lyncoln_erc@hotmail.com
 
-Para mover para a reserva, o jogador deve ser selecionado na Lista De Jogadores e ao selecionar, clicar em "enviar para a reserva". Para facilitar, pode selecionar vários de uma vez.
-Uma vez na reserva, ele vai ficar na fila para ser o próximo a entrar no time que solicitar.
-Para evitar "panelinha", basta segurar o botão de misturar próxima que os jogadores da próxima serão embaralhados aleatoriamente. Ao ser apagado da lista de reservas, ele continuará na lista geral da terceira página.
-Para remover da lista de reservas, pode pressionar e segurar o jogador que aparecerá a opção de remover apenas ele, ou caso queira limpar toda a lista, só clicar em Limpar Próximas.
+---
+2024 | Desenvolvido por Emerson Ribeiro
 
-#Time Titular
+## Capturas de Tela
 
-Para adicionar jogador no time titular, basta clicar na seta verde, para retirar ele do time, clique na seta vermelha. Ao sair do time titular, automaticamente ele será encaminhado ao último da fila de reservas.
-O primeiro jogador da lista de reserva será adicionado onde for clicado na seta verde e seu nome será removido da lista de reservas.
-Para adicionar gol, basta acionar o botão da bola e para adicionar assistência, a chuteira do respectivo jogador, assim será contado na artilharia.
+![Demonstração](Imagens/exemplo.gif) | ![Alterar Nome do Jogador](Imagens/inicial.jpeg)
+|:---:|:---:|
+![Alterar Nome do Jogador](Imagens/ajuda.jpeg)| ![Página Principal](Imagens/partida.jpeg)
+|:---:|:---:|
+![Reservas](Imagens/proxima.jpeg)| ![Lista de Jogadores](Imagens/listaGeral.jpeg)
+|:---:|:---:|
+![Artilharia](Imagens/artilharia.jpeg)| ![Artilharia](Imagens/confirmarZerar.jpeg)
+|:---:|:---:|
+![Adicionar Jogador](Imagens/adicionarJogador.jpeg)| ![Alterar Nome do Jogador](Imagens/alterarNome.jpeg)
 
-#Zerar o placar
 
-Para zerar o placar, basta um clice no X no placar que será zerado.
-Mesmo com o aplicativo minimizado, o cronômetro conitnuará rodando, exceto se sair da aplicação que ele será zerado.
