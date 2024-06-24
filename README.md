@@ -61,12 +61,16 @@ Atualmente não suportado.
 
 ![Demonstração](Imagens/exemplo.gif) | ![Alterar Nome do Jogador](Imagens/inicial.jpeg)
 |:---:|:---:|
+
 ![Alterar Nome do Jogador](Imagens/ajuda.jpeg)| ![Página Principal](Imagens/partida.jpeg)
 |:---:|:---:|
+
 ![Reservas](Imagens/proxima.jpeg)| ![Lista de Jogadores](Imagens/listaGeral.jpeg)
 |:---:|:---:|
+
 ![Artilharia](Imagens/artilharia.jpeg)| ![Artilharia](Imagens/confirmarZerar.jpeg)
 |:---:|:---:|
-![Adicionar Jogador](Imagens/adicionarJogador.jpeg)| ![Alterar Nome do Jogador](Imagens/alterarNome.jpeg)
 
+![Adicionar Jogador](Imagens/adicionarJogador.jpeg)| ![Alterar Nome do Jogador](Imagens/alterarNome.jpeg)
+|:---:|:---:|
 
