@@ -1,9 +1,9 @@
 
-# Futebol Amigos App
+# 📱 Futebol Amigos App
 
 Um aplicativo mobile para organizar partidas de futebol entre amigos, substituindo a tradicional prancheta.
 
-## Funcionalidades Principais
+## 🚀 Funcionalidades Principais
 
 - **Lista Geral de Jogadores:**
   - Adicione jogadores à lista geral.
@@ -16,6 +16,11 @@ Um aplicativo mobile para organizar partidas de futebol entre amigos, substituin
 
 - **Marcação de Gols e Assistências:**
   - Registre gols e assistências durante a partida, automaticamente atualizando estatísticas individuais.
+
+## ⚙️ Tecnologias Utilizadas:
+    - ⚛️ React Native;
+    - ⚛️ Expo;
+    - 🚀 TypeScript;
 
 
 ## Instalação
@@ -52,7 +57,7 @@ Atualmente não suportado.
 ---
 2024 | Desenvolvido por Emerson Ribeiro
 
-## Capturas de Tela
+## ScreenShots
 
 ![Demonstração](Imagens/exemplo.gif) | ![Alterar Nome do Jogador](Imagens/inicial.jpeg)
 |:---:|:---:|
